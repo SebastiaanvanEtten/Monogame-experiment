@@ -4,69 +4,69 @@
   <Platform>Windows</Platform>
   <Config />
   <SourceFiles>
-    <File>C:/Users/Sebastiaan/Desktop/Game1/Game1/Content/image.png</File>
-    <File>C:/Users/Sebastiaan/Desktop/Game1/Game1/Content/File.spritefont</File>
-    <File>C:/Users/Sebastiaan/Desktop/Game1/Game1/Content/BG1.png</File>
-    <File>C:/Users/Sebastiaan/Desktop/Game1/Game1/Content/BG2.png</File>
-    <File>C:/Users/Sebastiaan/Desktop/Game1/Game1/Content/BG3.png</File>
-    <File>C:/Users/Sebastiaan/Desktop/Game1/Game1/Content/BG4.png</File>
-    <File>C:/Users/Sebastiaan/Desktop/Game1/Game1/Content/BG5.png</File>
-    <File>C:/Users/Sebastiaan/Desktop/Game1/Game1/Content/BG6.png</File>
-    <File>C:/Users/Sebastiaan/Desktop/Game1/Game1/Content/BG7.png</File>
-    <File>C:/Users/Sebastiaan/Desktop/Game1/Game1/Content/BG8.png</File>
-    <File>C:/Users/Sebastiaan/Desktop/Game1/Game1/Content/IDLE1.png</File>
-    <File>C:/Users/Sebastiaan/Desktop/Game1/Game1/Content/IDLE2.png</File>
-    <File>C:/Users/Sebastiaan/Desktop/Game1/Game1/Content/IDLE3.png</File>
-    <File>C:/Users/Sebastiaan/Desktop/Game1/Game1/Content/IDLE4.png</File>
-    <File>C:/Users/Sebastiaan/Desktop/Game1/Game1/Content/IDLE5.png</File>
-    <File>C:/Users/Sebastiaan/Desktop/Game1/Game1/Content/IDLE6.png</File>
-    <File>C:/Users/Sebastiaan/Desktop/Game1/Game1/Content/IDLE7.png</File>
-    <File>C:/Users/Sebastiaan/Desktop/Game1/Game1/Content/IDLE8.png</File>
-    <File>C:/Users/Sebastiaan/Desktop/Game1/Game1/Content/IDLE9.png</File>
-    <File>C:/Users/Sebastiaan/Desktop/Game1/Game1/Content/IDLE10.png</File>
-    <File>C:/Users/Sebastiaan/Desktop/Game1/Game1/Content/KICK1.png</File>
-    <File>C:/Users/Sebastiaan/Desktop/Game1/Game1/Content/KICK2.png</File>
-    <File>C:/Users/Sebastiaan/Desktop/Game1/Game1/Content/KICK3.png</File>
-    <File>C:/Users/Sebastiaan/Desktop/Game1/Game1/Content/KICK4.png</File>
-    <File>C:/Users/Sebastiaan/Desktop/Game1/Game1/Content/KICK5.png</File>
-    <File>C:/Users/Sebastiaan/Desktop/Game1/Game1/Content/KICK6.png</File>
-    <File>C:/Users/Sebastiaan/Desktop/Game1/Game1/Content/KICK7.png</File>
-    <File>C:/Users/Sebastiaan/Desktop/Game1/Game1/Content/KICK8.png</File>
-    <File>C:/Users/Sebastiaan/Desktop/Game1/Game1/Content/KICK9.png</File>
-    <File>C:/Users/Sebastiaan/Desktop/Game1/Game1/Content/KICK10.png</File>
-    <File>C:/Users/Sebastiaan/Desktop/Game1/Game1/Content/KICK11.png</File>
-    <File>C:/Users/Sebastiaan/Desktop/Game1/Game1/Content/KICK12.png</File>
-    <File>C:/Users/Sebastiaan/Desktop/Game1/Game1/Content/KICK13.png</File>
-    <File>C:/Users/Sebastiaan/Desktop/Game1/Game1/Content/KICK14.png</File>
-    <File>C:/Users/Sebastiaan/Desktop/Game1/Game1/Content/PUNCH1.png</File>
-    <File>C:/Users/Sebastiaan/Desktop/Game1/Game1/Content/PUNCH2.png</File>
-    <File>C:/Users/Sebastiaan/Desktop/Game1/Game1/Content/PUNCH3.png</File>
-    <File>C:/Users/Sebastiaan/Desktop/Game1/Game1/Content/PUNCH4.png</File>
-    <File>C:/Users/Sebastiaan/Desktop/Game1/Game1/Content/PUNCH5.png</File>
-    <File>C:/Users/Sebastiaan/Desktop/Game1/Game1/Content/PUNCH6.png</File>
-    <File>C:/Users/Sebastiaan/Desktop/Game1/Game1/Content/PUNCH7.png</File>
-    <File>C:/Users/Sebastiaan/Desktop/Game1/Game1/Content/PUNCH8.png</File>
-    <File>C:/Users/Sebastiaan/Desktop/Game1/Game1/Content/PUNCH9.png</File>
-    <File>C:/Users/Sebastiaan/Desktop/Game1/Game1/Content/WALK1.png</File>
-    <File>C:/Users/Sebastiaan/Desktop/Game1/Game1/Content/WALK2.png</File>
-    <File>C:/Users/Sebastiaan/Desktop/Game1/Game1/Content/WALK3.png</File>
-    <File>C:/Users/Sebastiaan/Desktop/Game1/Game1/Content/WALK4.png</File>
-    <File>C:/Users/Sebastiaan/Desktop/Game1/Game1/Content/WALK5.png</File>
-    <File>C:/Users/Sebastiaan/Desktop/Game1/Game1/Content/WALK6.png</File>
-    <File>C:/Users/Sebastiaan/Desktop/Game1/Game1/Content/WALK7.png</File>
-    <File>C:/Users/Sebastiaan/Desktop/Game1/Game1/Content/WALK8.png</File>
-    <File>C:/Users/Sebastiaan/Desktop/Game1/Game1/Content/WALK9.png</File>
-    <File>C:/Users/Sebastiaan/Desktop/Game1/Game1/Content/WALK10.png</File>
-    <File>C:/Users/Sebastiaan/Desktop/Game1/Game1/Content/WALK11.png</File>
-    <File>C:/Users/Sebastiaan/Desktop/Game1/Game1/Content/JUMP1.png</File>
-    <File>C:/Users/Sebastiaan/Desktop/Game1/Game1/Content/JUMP2.png</File>
-    <File>C:/Users/Sebastiaan/Desktop/Game1/Game1/Content/JUMP3.png</File>
-    <File>C:/Users/Sebastiaan/Desktop/Game1/Game1/Content/JUMP4.png</File>
-    <File>C:/Users/Sebastiaan/Desktop/Game1/Game1/Content/JUMP5.png</File>
-    <File>C:/Users/Sebastiaan/Desktop/Game1/Game1/Content/JUMP6.png</File>
-    <File>C:/Users/Sebastiaan/Desktop/Game1/Game1/Content/JUMP7.png</File>
-    <File>C:/Users/Sebastiaan/Desktop/Game1/Game1/Content/JUMP8.png</File>
-    <File>C:/Users/Sebastiaan/Desktop/Game1/Game1/Content/JUMP9.png</File>
-    <File>C:/Users/Sebastiaan/Desktop/Game1/Game1/Content/JUMP10.png</File>
+    <File>C:/Users/Sebastiaan/Desktop/Game1 - kopie/Game1/Content/image.png</File>
+    <File>C:/Users/Sebastiaan/Desktop/Game1 - kopie/Game1/Content/File.spritefont</File>
+    <File>C:/Users/Sebastiaan/Desktop/Game1 - kopie/Game1/Content/BG1.png</File>
+    <File>C:/Users/Sebastiaan/Desktop/Game1 - kopie/Game1/Content/BG2.png</File>
+    <File>C:/Users/Sebastiaan/Desktop/Game1 - kopie/Game1/Content/BG3.png</File>
+    <File>C:/Users/Sebastiaan/Desktop/Game1 - kopie/Game1/Content/BG4.png</File>
+    <File>C:/Users/Sebastiaan/Desktop/Game1 - kopie/Game1/Content/BG5.png</File>
+    <File>C:/Users/Sebastiaan/Desktop/Game1 - kopie/Game1/Content/BG6.png</File>
+    <File>C:/Users/Sebastiaan/Desktop/Game1 - kopie/Game1/Content/BG7.png</File>
+    <File>C:/Users/Sebastiaan/Desktop/Game1 - kopie/Game1/Content/BG8.png</File>
+    <File>C:/Users/Sebastiaan/Desktop/Game1 - kopie/Game1/Content/IDLE1.png</File>
+    <File>C:/Users/Sebastiaan/Desktop/Game1 - kopie/Game1/Content/IDLE2.png</File>
+    <File>C:/Users/Sebastiaan/Desktop/Game1 - kopie/Game1/Content/IDLE3.png</File>
+    <File>C:/Users/Sebastiaan/Desktop/Game1 - kopie/Game1/Content/IDLE4.png</File>
+    <File>C:/Users/Sebastiaan/Desktop/Game1 - kopie/Game1/Content/IDLE5.png</File>
+    <File>C:/Users/Sebastiaan/Desktop/Game1 - kopie/Game1/Content/IDLE6.png</File>
+    <File>C:/Users/Sebastiaan/Desktop/Game1 - kopie/Game1/Content/IDLE7.png</File>
+    <File>C:/Users/Sebastiaan/Desktop/Game1 - kopie/Game1/Content/IDLE8.png</File>
+    <File>C:/Users/Sebastiaan/Desktop/Game1 - kopie/Game1/Content/IDLE9.png</File>
+    <File>C:/Users/Sebastiaan/Desktop/Game1 - kopie/Game1/Content/IDLE10.png</File>
+    <File>C:/Users/Sebastiaan/Desktop/Game1 - kopie/Game1/Content/KICK1.png</File>
+    <File>C:/Users/Sebastiaan/Desktop/Game1 - kopie/Game1/Content/KICK2.png</File>
+    <File>C:/Users/Sebastiaan/Desktop/Game1 - kopie/Game1/Content/KICK3.png</File>
+    <File>C:/Users/Sebastiaan/Desktop/Game1 - kopie/Game1/Content/KICK4.png</File>
+    <File>C:/Users/Sebastiaan/Desktop/Game1 - kopie/Game1/Content/KICK5.png</File>
+    <File>C:/Users/Sebastiaan/Desktop/Game1 - kopie/Game1/Content/KICK6.png</File>
+    <File>C:/Users/Sebastiaan/Desktop/Game1 - kopie/Game1/Content/KICK7.png</File>
+    <File>C:/Users/Sebastiaan/Desktop/Game1 - kopie/Game1/Content/KICK8.png</File>
+    <File>C:/Users/Sebastiaan/Desktop/Game1 - kopie/Game1/Content/KICK9.png</File>
+    <File>C:/Users/Sebastiaan/Desktop/Game1 - kopie/Game1/Content/KICK10.png</File>
+    <File>C:/Users/Sebastiaan/Desktop/Game1 - kopie/Game1/Content/KICK11.png</File>
+    <File>C:/Users/Sebastiaan/Desktop/Game1 - kopie/Game1/Content/KICK12.png</File>
+    <File>C:/Users/Sebastiaan/Desktop/Game1 - kopie/Game1/Content/KICK13.png</File>
+    <File>C:/Users/Sebastiaan/Desktop/Game1 - kopie/Game1/Content/KICK14.png</File>
+    <File>C:/Users/Sebastiaan/Desktop/Game1 - kopie/Game1/Content/PUNCH1.png</File>
+    <File>C:/Users/Sebastiaan/Desktop/Game1 - kopie/Game1/Content/PUNCH2.png</File>
+    <File>C:/Users/Sebastiaan/Desktop/Game1 - kopie/Game1/Content/PUNCH3.png</File>
+    <File>C:/Users/Sebastiaan/Desktop/Game1 - kopie/Game1/Content/PUNCH4.png</File>
+    <File>C:/Users/Sebastiaan/Desktop/Game1 - kopie/Game1/Content/PUNCH5.png</File>
+    <File>C:/Users/Sebastiaan/Desktop/Game1 - kopie/Game1/Content/PUNCH6.png</File>
+    <File>C:/Users/Sebastiaan/Desktop/Game1 - kopie/Game1/Content/PUNCH7.png</File>
+    <File>C:/Users/Sebastiaan/Desktop/Game1 - kopie/Game1/Content/PUNCH8.png</File>
+    <File>C:/Users/Sebastiaan/Desktop/Game1 - kopie/Game1/Content/PUNCH9.png</File>
+    <File>C:/Users/Sebastiaan/Desktop/Game1 - kopie/Game1/Content/WALK1.png</File>
+    <File>C:/Users/Sebastiaan/Desktop/Game1 - kopie/Game1/Content/WALK2.png</File>
+    <File>C:/Users/Sebastiaan/Desktop/Game1 - kopie/Game1/Content/WALK3.png</File>
+    <File>C:/Users/Sebastiaan/Desktop/Game1 - kopie/Game1/Content/WALK4.png</File>
+    <File>C:/Users/Sebastiaan/Desktop/Game1 - kopie/Game1/Content/WALK5.png</File>
+    <File>C:/Users/Sebastiaan/Desktop/Game1 - kopie/Game1/Content/WALK6.png</File>
+    <File>C:/Users/Sebastiaan/Desktop/Game1 - kopie/Game1/Content/WALK7.png</File>
+    <File>C:/Users/Sebastiaan/Desktop/Game1 - kopie/Game1/Content/WALK8.png</File>
+    <File>C:/Users/Sebastiaan/Desktop/Game1 - kopie/Game1/Content/WALK9.png</File>
+    <File>C:/Users/Sebastiaan/Desktop/Game1 - kopie/Game1/Content/WALK10.png</File>
+    <File>C:/Users/Sebastiaan/Desktop/Game1 - kopie/Game1/Content/WALK11.png</File>
+    <File>C:/Users/Sebastiaan/Desktop/Game1 - kopie/Game1/Content/JUMP1.png</File>
+    <File>C:/Users/Sebastiaan/Desktop/Game1 - kopie/Game1/Content/JUMP2.png</File>
+    <File>C:/Users/Sebastiaan/Desktop/Game1 - kopie/Game1/Content/JUMP3.png</File>
+    <File>C:/Users/Sebastiaan/Desktop/Game1 - kopie/Game1/Content/JUMP4.png</File>
+    <File>C:/Users/Sebastiaan/Desktop/Game1 - kopie/Game1/Content/JUMP5.png</File>
+    <File>C:/Users/Sebastiaan/Desktop/Game1 - kopie/Game1/Content/JUMP6.png</File>
+    <File>C:/Users/Sebastiaan/Desktop/Game1 - kopie/Game1/Content/JUMP7.png</File>
+    <File>C:/Users/Sebastiaan/Desktop/Game1 - kopie/Game1/Content/JUMP8.png</File>
+    <File>C:/Users/Sebastiaan/Desktop/Game1 - kopie/Game1/Content/JUMP9.png</File>
+    <File>C:/Users/Sebastiaan/Desktop/Game1 - kopie/Game1/Content/JUMP10.png</File>
   </SourceFiles>
 </SourceFileCollection>
