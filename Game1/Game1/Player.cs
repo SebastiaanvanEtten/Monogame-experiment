@@ -23,9 +23,73 @@ namespace Game1
         public int Kickloop;
         public int Punchloop;
         public int Jumploop;
+        public Texture2D IDLE1, IDLE2, IDLE3, IDLE4, IDLE5, IDLE6, IDLE7, IDLE8, IDLE9, IDLE10;
+        public Texture2D KICK1, KICK2, KICK3, KICK4, KICK5, KICK6, KICK7, KICK8, KICK9, KICK10, KICK11, KICK12, KICK13, KICK14;
+        public Texture2D WALK1, WALK2, WALK3, WALK4, WALK5, WALK6, WALK7, WALK8, WALK9, WALK10, WALK11;
+        public Texture2D PUNCH1, PUNCH2, PUNCH3, PUNCH4, PUNCH5, PUNCH6, PUNCH7, PUNCH8, PUNCH9;
+        public Texture2D JUMP1, JUMP2, JUMP3, JUMP4, JUMP5, JUMP6, JUMP7, JUMP8, JUMP9, JUMP10;
 
-        public Player()
+        public Player(Texture2D IDLE1, Texture2D IDLE2, Texture2D IDLE3, Texture2D IDLE4, Texture2D IDLE5, Texture2D IDLE6, Texture2D IDLE7, Texture2D IDLE8, Texture2D IDLE9, Texture2D IDLE10, Texture2D KICK1, Texture2D KICK2, Texture2D KICK3, Texture2D KICK4, Texture2D KICK5, Texture2D KICK6, Texture2D KICK7, Texture2D KICK8, Texture2D KICK9, Texture2D KICK10, Texture2D KICK11, Texture2D KICK12, Texture2D KICK13, Texture2D KICK14, Texture2D WALK1, Texture2D WALK2, Texture2D WALK3, Texture2D WALK4, Texture2D WALK5, Texture2D WALK6, Texture2D WALK7, Texture2D WALK8, Texture2D WALK9, Texture2D WALK10, Texture2D WALK11, Texture2D PUNCH1, Texture2D PUNCH2, Texture2D PUNCH3, Texture2D PUNCH4, Texture2D PUNCH5, Texture2D PUNCH6, Texture2D PUNCH7, Texture2D PUNCH8, Texture2D PUNCH9, Texture2D JUMP1, Texture2D JUMP2, Texture2D JUMP3, Texture2D JUMP4, Texture2D JUMP5, Texture2D JUMP6, Texture2D JUMP7, Texture2D JUMP8, Texture2D JUMP9, Texture2D JUMP10)
         {
+            this.IDLE1 = IDLE1;
+            this.IDLE2 = IDLE2;
+            this.IDLE3 = IDLE3;
+            this.IDLE4 = IDLE4;
+            this.IDLE5 = IDLE5;
+            this.IDLE6 = IDLE6;
+            this.IDLE7 = IDLE7;
+            this.IDLE8 = IDLE8;
+            this.IDLE9 = IDLE9;
+            this.IDLE10 = IDLE10;
+
+            this.KICK1 = KICK1;
+            this.KICK2 = KICK2;
+            this.KICK3 = KICK3;
+            this.KICK4 = KICK4;
+            this.KICK5 = KICK5;
+            this.KICK6 = KICK6;
+            this.KICK7 = KICK7;
+            this.KICK8 = KICK8;
+            this.KICK9 = KICK9;
+            this.KICK10 = KICK10;
+            this.KICK11 = KICK11;
+            this.KICK12 = KICK12;
+            this.KICK13 = KICK13;
+            this.KICK14 = KICK14;
+
+            this.WALK1 = WALK1;
+            this.WALK2 = WALK2;
+            this.WALK3 = WALK3;
+            this.WALK4 = WALK4;
+            this.WALK5 = WALK5;
+            this.WALK6 = WALK6;
+            this.WALK7 = WALK7;
+            this.WALK8 = WALK8;
+            this.WALK9 = WALK9;
+            this.WALK10 = WALK10;
+            this.WALK11 = WALK11;
+
+            this.PUNCH1 = PUNCH1;
+            this.PUNCH2 = PUNCH2;
+            this.PUNCH3 = PUNCH3;
+            this.PUNCH4 = PUNCH4;
+            this.PUNCH5 = PUNCH5;
+            this.PUNCH6 = PUNCH6;
+            this.PUNCH7 = PUNCH7;
+            this.PUNCH8 = PUNCH8;
+            this.PUNCH9 = PUNCH9;
+
+            this.JUMP1 = JUMP1;
+            this.JUMP2 = JUMP2;
+            this.JUMP3 = JUMP3;
+            this.JUMP4 = JUMP4;
+            this.JUMP5 = JUMP5;
+            this.JUMP6 = JUMP6;
+            this.JUMP7 = JUMP7;
+            this.JUMP8 = JUMP8;
+            this.JUMP9 = JUMP9;
+            this.JUMP10 = JUMP10;
+
             this.y = groundline; // de begin Y pos van de speler.... dit moet echt een class in...
             this.x = 100; // the hardcode is real... CLASSES
             this.jumpbool = false; // dit gaat echt te ver... maar het werk :/

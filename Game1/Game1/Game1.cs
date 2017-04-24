@@ -23,8 +23,8 @@ namespace Game1
         public Texture2D JUMP1, JUMP2, JUMP3, JUMP4, JUMP5, JUMP6, JUMP7, JUMP8, JUMP9, JUMP10;
         public bool Ra;
         public bool La;
-        public int Height = 720;//GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Height; // scherm hoogte
-        public int Width = 1280;// Convert.ToInt32(GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Height * 1.77777776); // 16:9 aspect ratio
+        public static int Height = 720; // GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Height; // scherm hoogte
+        public static int Width = 1280; // Convert.ToInt32(GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Height * 1.77777776); // 16:9 aspect ratio
         public int groundline;
         KeyboardState oldState;
         Color backColor = Color.CornflowerBlue;
@@ -66,7 +66,8 @@ namespace Game1
             
         }
         Gamestate gamestate;
-
+        Background background;
+        IPlayer player1;
         protected override void LoadContent()
         {
             // Create a new SpriteBatch, which can be used to draw textures.
@@ -141,10 +142,12 @@ namespace Game1
             BG6 = Content.Load<Texture2D>("BG6");
             BG7 = Content.Load<Texture2D>("BG7");
             BG8 = Content.Load<Texture2D>("BG8");
-
-            gamestate = new Gamestate(BG1);
             
-         
+            background = new Background(BG1, BG2, BG3, BG4, BG5, BG6, BG7, BG8, Width, Height);
+            player1 = new Player(IDLE1, IDLE2, IDLE3, IDLE4, IDLE5, IDLE6, IDLE7, IDLE8, IDLE9, IDLE10, KICK1, KICK2, KICK3, KICK4, KICK5, KICK6, KICK7, KICK8, KICK9, KICK10, KICK11, KICK12, KICK13, KICK14, WALK1, WALK2, WALK3, WALK4, WALK5, WALK6, WALK7, WALK8, WALK9, WALK10, WALK11, PUNCH1, PUNCH2, PUNCH3, PUNCH4, PUNCH5, PUNCH6, PUNCH7, PUNCH8, PUNCH9, JUMP1, JUMP2, JUMP3, JUMP4, JUMP5, JUMP6, JUMP7, JUMP8, JUMP9, JUMP10);
+
+            gamestate = new Gamestate(background,player1);
+
         }
 
         /// <summary>
@@ -169,14 +172,7 @@ namespace Game1
             
             //dit kijkt naar welke knop er is inegrukt en welke niet 
             UpdateInput();
-
-            mainloop++;
-            if (mainloop % 6 == 0)
-            {
-                graphicloop++;
-            }
-            if (graphicloop > 7) { graphicloop = 0; }
-
+            gamestate.Update((float)gameTime.ElapsedGameTime.TotalSeconds);
             base.Update(gameTime);
         }
 

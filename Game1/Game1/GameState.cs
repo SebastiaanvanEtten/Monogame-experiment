@@ -10,19 +10,24 @@ namespace Game1
 {
     public class Gamestate : IComponent
     {
-        Texture2D background;
-        public Gamestate(Texture2D background)
+        Background background;
+        IPlayer player;
+
+        public Gamestate(Background bg, IPlayer player)
         {
-            this.background = background;
+            this.background = bg;
+            this.player = player;
         }
 
         public void Update(float dt)
         {
-            
+            this.player.Update(dt);
+            this.background.Update(dt);
         }
         public void Draw(SpriteBatch spriteBatch)
         {
-            spriteBatch.Draw(background, Vector2.Zero, Color.White);
+            this.background.Draw(spriteBatch);
+            this.player.Draw(spriteBatch);
         }
     }
 }
