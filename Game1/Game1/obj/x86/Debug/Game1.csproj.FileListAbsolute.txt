@@ -196,3 +196,14 @@ C:\Users\Sebastiaan\Desktop\Game1 - kopie\Game1\bin\Windows\x86\Debug\SharpDX.Di
 C:\Users\Sebastiaan\Desktop\Game1 - kopie\Game1\bin\Windows\x86\Debug\SharpDX.XInput.xml
 C:\Users\Sebastiaan\Desktop\Game1 - kopie\Game1\bin\Windows\x86\Debug\SharpDX.Direct3D9.xml
 C:\Users\Sebastiaan\Desktop\Game1 - kopie\Game1\obj\x86\Debug\Game1.csprojResolveAssemblyReference.cache
+C:\Users\Sebastiaan\Desktop\Game1 - kopie\Game1\bin\Windows\x86\Debug\Content\WALKB1.xnb
+C:\Users\Sebastiaan\Desktop\Game1 - kopie\Game1\bin\Windows\x86\Debug\Content\WALKB10.xnb
+C:\Users\Sebastiaan\Desktop\Game1 - kopie\Game1\bin\Windows\x86\Debug\Content\WALKB11.xnb
+C:\Users\Sebastiaan\Desktop\Game1 - kopie\Game1\bin\Windows\x86\Debug\Content\WALKB2.xnb
+C:\Users\Sebastiaan\Desktop\Game1 - kopie\Game1\bin\Windows\x86\Debug\Content\WALKB3.xnb
+C:\Users\Sebastiaan\Desktop\Game1 - kopie\Game1\bin\Windows\x86\Debug\Content\WALKB4.xnb
+C:\Users\Sebastiaan\Desktop\Game1 - kopie\Game1\bin\Windows\x86\Debug\Content\WALKB5.xnb
+C:\Users\Sebastiaan\Desktop\Game1 - kopie\Game1\bin\Windows\x86\Debug\Content\WALKB6.xnb
+C:\Users\Sebastiaan\Desktop\Game1 - kopie\Game1\bin\Windows\x86\Debug\Content\WALKB7.xnb
+C:\Users\Sebastiaan\Desktop\Game1 - kopie\Game1\bin\Windows\x86\Debug\Content\WALKB8.xnb
+C:\Users\Sebastiaan\Desktop\Game1 - kopie\Game1\bin\Windows\x86\Debug\Content\WALKB9.xnb

@@ -21,10 +21,11 @@ namespace Game1
         public Texture2D WALK1, WALK2, WALK3, WALK4, WALK5, WALK6, WALK7, WALK8, WALK9, WALK10, WALK11;
         public Texture2D PUNCH1, PUNCH2, PUNCH3, PUNCH4, PUNCH5, PUNCH6, PUNCH7, PUNCH8, PUNCH9;
         public Texture2D JUMP1, JUMP2, JUMP3, JUMP4, JUMP5, JUMP6, JUMP7, JUMP8, JUMP9, JUMP10;
+        public Texture2D WALKB1, WALKB2, WALKB3, WALKB4, WALKB5, WALKB6, WALKB7, WALKB8, WALKB9, WALKB10, WALKB11;
         public bool Ra;
         public bool La;
-        public static int Height = 720; // GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Height; // scherm hoogte
-        public static int Width = 1280; // Convert.ToInt32(GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Height * 1.77777776); // 16:9 aspect ratio
+        public static int Height = GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Height; // scherm hoogte
+        public static int Width = Convert.ToInt32(GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Height * 1.77777776); // 16:9 aspect ratio
         public int groundline;
         Color backColor = Color.CornflowerBlue;
         public SpriteFont font;
@@ -39,7 +40,7 @@ namespace Game1
             Content.RootDirectory = "Content";
             graphics.PreferredBackBufferWidth = Width;
             graphics.PreferredBackBufferHeight = Height;
-            graphics.IsFullScreen = false;
+            graphics.IsFullScreen = true;
             graphics.ApplyChanges(); // hiermee kan je midden in de game je resolutie veranderen, waar die nu staat doet het eigenlijk niks. je moet het na een verandering zetten/roepen.
             this.groundline = Height - (Height / 3); // definitie van de grond
             this.graphicloop = 0; // voor de background animatie
@@ -112,6 +113,18 @@ namespace Game1
             WALK10 = Content.Load<Texture2D>("WALK10");
             WALK11 = Content.Load<Texture2D>("WALK11");
 
+            WALKB1 = Content.Load<Texture2D>("WALKB1");
+            WALKB2 = Content.Load<Texture2D>("WALKB2");
+            WALKB3 = Content.Load<Texture2D>("WALKB3");
+            WALKB4 = Content.Load<Texture2D>("WALKB4");
+            WALKB5 = Content.Load<Texture2D>("WALKB5");
+            WALKB6 = Content.Load<Texture2D>("WALKB6");
+            WALKB7 = Content.Load<Texture2D>("WALKB7");
+            WALKB8 = Content.Load<Texture2D>("WALKB8");
+            WALKB9 = Content.Load<Texture2D>("WALKB9");
+            WALKB10 = Content.Load<Texture2D>("WALKB10");
+            WALKB11 = Content.Load<Texture2D>("WALKB11");
+
             PUNCH1 = Content.Load<Texture2D>("PUNCH1");
             PUNCH2 = Content.Load<Texture2D>("PUNCH2");
             PUNCH3 = Content.Load<Texture2D>("PUNCH3");
@@ -143,7 +156,7 @@ namespace Game1
             BG8 = Content.Load<Texture2D>("BG8");
             
             background = new Background(BG1, BG2, BG3, BG4, BG5, BG6, BG7, BG8, Width, Height);
-            player1 = new Player(groundline, Width, Height, IDLE1, IDLE2, IDLE3, IDLE4, IDLE5, IDLE6, IDLE7, IDLE8, IDLE9, IDLE10, KICK1, KICK2, KICK3, KICK4, KICK5, KICK6, KICK7, KICK8, KICK9, KICK10, KICK11, KICK12, KICK13, KICK14, WALK1, WALK2, WALK3, WALK4, WALK5, WALK6, WALK7, WALK8, WALK9, WALK10, WALK11, PUNCH1, PUNCH2, PUNCH3, PUNCH4, PUNCH5, PUNCH6, PUNCH7, PUNCH8, PUNCH9, JUMP1, JUMP2, JUMP3, JUMP4, JUMP5, JUMP6, JUMP7, JUMP8, JUMP9, JUMP10);
+            player1 = new Player(groundline, Width, Height, IDLE1, IDLE2, IDLE3, IDLE4, IDLE5, IDLE6, IDLE7, IDLE8, IDLE9, IDLE10, KICK1, KICK2, KICK3, KICK4, KICK5, KICK6, KICK7, KICK8, KICK9, KICK10, KICK11, KICK12, KICK13, KICK14, WALK1, WALK2, WALK3, WALK4, WALK5, WALK6, WALK7, WALK8, WALK9, WALK10, WALK11, PUNCH1, PUNCH2, PUNCH3, PUNCH4, PUNCH5, PUNCH6, PUNCH7, PUNCH8, PUNCH9, JUMP1, JUMP2, JUMP3, JUMP4, JUMP5, JUMP6, JUMP7, JUMP8, JUMP9, JUMP10, WALKB1, WALKB2, WALKB3, WALKB4, WALKB5, WALKB6, WALKB7, WALKB8, WALKB9, WALKB10, WALKB11);
 
             gamestate = new Gamestate(background,player1);
 
