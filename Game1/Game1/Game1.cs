@@ -32,7 +32,6 @@ namespace Game1
         public int mainloop;
         public int graphicloop;
         public Player speler1;
-        public Gamestate gamestate;
         
 
         public Game1()
@@ -64,8 +63,10 @@ namespace Game1
             base.Initialize();
             //Player speler1 = new Player();
             oldState = Keyboard.GetState(); // dit word alleen in die UpdateInput() gebruikt
+            
         }
-        
+        Gamestate gamestate;
+
         protected override void LoadContent()
         {
             // Create a new SpriteBatch, which can be used to draw textures.
@@ -141,7 +142,7 @@ namespace Game1
             BG7 = Content.Load<Texture2D>("BG7");
             BG8 = Content.Load<Texture2D>("BG8");
 
-            Gamestate gamestate = new Gamestate(BG1);
+            gamestate = new Gamestate(BG1);
             
          
         }
