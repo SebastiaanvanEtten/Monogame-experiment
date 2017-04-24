@@ -9,7 +9,7 @@ using Microsoft.Xna.Framework.Input;
 
 namespace Game1
 {
-    public class Player : Game1, IPlayer
+    public class Player : IPlayer
     {
 
         public int x;
@@ -18,18 +18,23 @@ namespace Game1
         public int vel;
         public bool Ra;
         public bool La;
+        public int Height;
+        public int Width;
+        public int groundline;
         public int Idleloop;
         public int Walkloop;
         public int Kickloop;
         public int Punchloop;
         public int Jumploop;
+        public int Animationloop;
         public Texture2D IDLE1, IDLE2, IDLE3, IDLE4, IDLE5, IDLE6, IDLE7, IDLE8, IDLE9, IDLE10;
         public Texture2D KICK1, KICK2, KICK3, KICK4, KICK5, KICK6, KICK7, KICK8, KICK9, KICK10, KICK11, KICK12, KICK13, KICK14;
         public Texture2D WALK1, WALK2, WALK3, WALK4, WALK5, WALK6, WALK7, WALK8, WALK9, WALK10, WALK11;
         public Texture2D PUNCH1, PUNCH2, PUNCH3, PUNCH4, PUNCH5, PUNCH6, PUNCH7, PUNCH8, PUNCH9;
         public Texture2D JUMP1, JUMP2, JUMP3, JUMP4, JUMP5, JUMP6, JUMP7, JUMP8, JUMP9, JUMP10;
+        public KeyboardState oldState;
 
-        public Player(Texture2D IDLE1, Texture2D IDLE2, Texture2D IDLE3, Texture2D IDLE4, Texture2D IDLE5, Texture2D IDLE6, Texture2D IDLE7, Texture2D IDLE8, Texture2D IDLE9, Texture2D IDLE10, Texture2D KICK1, Texture2D KICK2, Texture2D KICK3, Texture2D KICK4, Texture2D KICK5, Texture2D KICK6, Texture2D KICK7, Texture2D KICK8, Texture2D KICK9, Texture2D KICK10, Texture2D KICK11, Texture2D KICK12, Texture2D KICK13, Texture2D KICK14, Texture2D WALK1, Texture2D WALK2, Texture2D WALK3, Texture2D WALK4, Texture2D WALK5, Texture2D WALK6, Texture2D WALK7, Texture2D WALK8, Texture2D WALK9, Texture2D WALK10, Texture2D WALK11, Texture2D PUNCH1, Texture2D PUNCH2, Texture2D PUNCH3, Texture2D PUNCH4, Texture2D PUNCH5, Texture2D PUNCH6, Texture2D PUNCH7, Texture2D PUNCH8, Texture2D PUNCH9, Texture2D JUMP1, Texture2D JUMP2, Texture2D JUMP3, Texture2D JUMP4, Texture2D JUMP5, Texture2D JUMP6, Texture2D JUMP7, Texture2D JUMP8, Texture2D JUMP9, Texture2D JUMP10)
+        public Player(int groundline, int breed, int hoog, Texture2D IDLE1, Texture2D IDLE2, Texture2D IDLE3, Texture2D IDLE4, Texture2D IDLE5, Texture2D IDLE6, Texture2D IDLE7, Texture2D IDLE8, Texture2D IDLE9, Texture2D IDLE10, Texture2D KICK1, Texture2D KICK2, Texture2D KICK3, Texture2D KICK4, Texture2D KICK5, Texture2D KICK6, Texture2D KICK7, Texture2D KICK8, Texture2D KICK9, Texture2D KICK10, Texture2D KICK11, Texture2D KICK12, Texture2D KICK13, Texture2D KICK14, Texture2D WALK1, Texture2D WALK2, Texture2D WALK3, Texture2D WALK4, Texture2D WALK5, Texture2D WALK6, Texture2D WALK7, Texture2D WALK8, Texture2D WALK9, Texture2D WALK10, Texture2D WALK11, Texture2D PUNCH1, Texture2D PUNCH2, Texture2D PUNCH3, Texture2D PUNCH4, Texture2D PUNCH5, Texture2D PUNCH6, Texture2D PUNCH7, Texture2D PUNCH8, Texture2D PUNCH9, Texture2D JUMP1, Texture2D JUMP2, Texture2D JUMP3, Texture2D JUMP4, Texture2D JUMP5, Texture2D JUMP6, Texture2D JUMP7, Texture2D JUMP8, Texture2D JUMP9, Texture2D JUMP10)
         {
             this.IDLE1 = IDLE1;
             this.IDLE2 = IDLE2;
@@ -90,6 +95,12 @@ namespace Game1
             this.JUMP9 = JUMP9;
             this.JUMP10 = JUMP10;
 
+            this.Height = hoog;
+            this.Width = breed;
+            this.groundline = groundline;
+
+            this.oldState = Keyboard.GetState(); // dit word alleen in die UpdateInput() gebruikt
+
             this.y = groundline; // de begin Y pos van de speler.... dit moet echt een class in...
             this.x = 100; // the hardcode is real... CLASSES
             this.jumpbool = false; // dit gaat echt te ver... maar het werk :/
@@ -99,18 +110,21 @@ namespace Game1
             this.Kickloop = 0;
             this.Punchloop = 0;
             this.Jumploop = 0;
+            this.Animationloop = 0;
         }
 
         public void Update(float dt)
         {
-            if (mainloop % 6 == 0)
+            Animationloop++;
+            if (Animationloop % 6 == 0)
             { // elke % 6 updaten de animaties, dit is gwn om de snelheid van de animaties aan te passen (als dat nodig is)
-
                 Idleloop++;
                 Kickloop++;
                 Punchloop++;
                 Walkloop++;
             }
+
+            UpdateInput();
             //resets de loops individueel, hangt af van hoeveel plaatjes er in de loop zitten
             if (Idleloop > 9) { Idleloop = 0; }
             if (Walkloop > 10) { Walkloop = 0; }
@@ -222,6 +236,63 @@ namespace Game1
                     else if (Walkloop == 10) { spriteBatch.Draw(WALK11, new Rectangle(x, y, Convert.ToInt32(Height / 4.038), Convert.ToInt32(Height / 3.898)), Color.White); }
                 }
             }
+        }
+
+
+        private void UpdateInput()
+        {
+            KeyboardState newState = Keyboard.GetState();
+
+            if (newState.IsKeyDown(Keys.Up))
+            {
+                if (!oldState.IsKeyDown(Keys.Up))
+                {
+                    //stop animatie
+                }
+            }
+            else if (oldState.IsKeyDown(Keys.Up))
+            {
+                //start animatie;
+            }
+
+            if (newState.IsKeyDown(Keys.Left))
+            {
+                if (!oldState.IsKeyDown(Keys.Left))
+                {
+                    this.La = true;
+                }
+            }
+            else if (oldState.IsKeyDown(Keys.Left))
+            {
+                this.La = false;
+            }
+
+            if (newState.IsKeyDown(Keys.Right))
+            {
+                if (!oldState.IsKeyDown(Keys.Right))
+                {
+                    this.Ra = true;
+                }
+            }
+            else if (oldState.IsKeyDown(Keys.Right))
+            {
+                this.Ra = false;
+            }
+
+            if (newState.IsKeyDown(Keys.Down))
+            {
+                if (!oldState.IsKeyDown(Keys.Down))
+                {
+                    // stop animatie;
+                }
+            }
+            else if (oldState.IsKeyDown(Keys.Down))
+            {
+                //start animatie;
+            }
+
+            // Update saved state.
+            oldState = newState;
         }
 
     }

@@ -26,7 +26,6 @@ namespace Game1
         public static int Height = 720; // GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Height; // scherm hoogte
         public static int Width = 1280; // Convert.ToInt32(GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Height * 1.77777776); // 16:9 aspect ratio
         public int groundline;
-        KeyboardState oldState;
         Color backColor = Color.CornflowerBlue;
         public SpriteFont font;
         public int mainloop;
@@ -62,7 +61,7 @@ namespace Game1
         
             base.Initialize();
             //Player speler1 = new Player();
-            oldState = Keyboard.GetState(); // dit word alleen in die UpdateInput() gebruikt
+            
             
         }
         Gamestate gamestate;
@@ -144,7 +143,7 @@ namespace Game1
             BG8 = Content.Load<Texture2D>("BG8");
             
             background = new Background(BG1, BG2, BG3, BG4, BG5, BG6, BG7, BG8, Width, Height);
-            player1 = new Player(IDLE1, IDLE2, IDLE3, IDLE4, IDLE5, IDLE6, IDLE7, IDLE8, IDLE9, IDLE10, KICK1, KICK2, KICK3, KICK4, KICK5, KICK6, KICK7, KICK8, KICK9, KICK10, KICK11, KICK12, KICK13, KICK14, WALK1, WALK2, WALK3, WALK4, WALK5, WALK6, WALK7, WALK8, WALK9, WALK10, WALK11, PUNCH1, PUNCH2, PUNCH3, PUNCH4, PUNCH5, PUNCH6, PUNCH7, PUNCH8, PUNCH9, JUMP1, JUMP2, JUMP3, JUMP4, JUMP5, JUMP6, JUMP7, JUMP8, JUMP9, JUMP10);
+            player1 = new Player(groundline, Width, Height, IDLE1, IDLE2, IDLE3, IDLE4, IDLE5, IDLE6, IDLE7, IDLE8, IDLE9, IDLE10, KICK1, KICK2, KICK3, KICK4, KICK5, KICK6, KICK7, KICK8, KICK9, KICK10, KICK11, KICK12, KICK13, KICK14, WALK1, WALK2, WALK3, WALK4, WALK5, WALK6, WALK7, WALK8, WALK9, WALK10, WALK11, PUNCH1, PUNCH2, PUNCH3, PUNCH4, PUNCH5, PUNCH6, PUNCH7, PUNCH8, PUNCH9, JUMP1, JUMP2, JUMP3, JUMP4, JUMP5, JUMP6, JUMP7, JUMP8, JUMP9, JUMP10);
 
             gamestate = new Gamestate(background,player1);
 
@@ -171,7 +170,7 @@ namespace Game1
                 Exit();
             
             //dit kijkt naar welke knop er is inegrukt en welke niet 
-            UpdateInput();
+            
             gamestate.Update((float)gameTime.ElapsedGameTime.TotalSeconds);
             base.Update(gameTime);
         }
@@ -191,63 +190,6 @@ namespace Game1
 
             base.Draw(gameTime);
         }
-
-
-
-        private void UpdateInput()
-        {
-            KeyboardState newState = Keyboard.GetState();
-
-            if (newState.IsKeyDown(Keys.Up))
-            {
-                if (!oldState.IsKeyDown(Keys.Up))
-                {
-                    //stop animatie
-                }
-            }
-            else if (oldState.IsKeyDown(Keys.Up))
-            {
-                //start animatie;
-            }
-
-            if (newState.IsKeyDown(Keys.Left))
-            {
-                if (!oldState.IsKeyDown(Keys.Left))
-                {
-                    this.La = true;
-                }
-            }
-            else if (oldState.IsKeyDown(Keys.Left))
-            {
-                this.La = false;
-            }
-
-            if (newState.IsKeyDown(Keys.Right))
-            {
-                if (!oldState.IsKeyDown(Keys.Right))
-                {
-                    this.Ra = true;
-                }
-            }
-            else if (oldState.IsKeyDown(Keys.Right))
-            {
-                this.Ra = false;
-            }
-
-            if (newState.IsKeyDown(Keys.Down))
-            {
-                if (!oldState.IsKeyDown(Keys.Down))
-                {
-                    // stop animatie;
-                }
-            }
-            else if (oldState.IsKeyDown(Keys.Down))
-            {
-                //start animatie;
-            }
-
-            // Update saved state.
-            oldState = newState;
-        }
+        
     }
 }
