@@ -19,9 +19,10 @@ namespace Game1
         public Texture2D KICK1, KICK2, KICK3, KICK4, KICK5, KICK6, KICK7, KICK8, KICK9, KICK10, KICK11, KICK12, KICK13, KICK14;
         public Texture2D WALK1, WALK2, WALK3, WALK4, WALK5, WALK6, WALK7, WALK8, WALK9, WALK10, WALK11;
         public Texture2D PUNCH1, PUNCH2, PUNCH3, PUNCH4, PUNCH5, PUNCH6, PUNCH7, PUNCH8, PUNCH9;
+        public Texture2D JUMP1, JUMP2, JUMP3, JUMP4, JUMP5, JUMP6, JUMP7, JUMP8, JUMP9, JUMP10;
 
         public int Height = GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Height; // scherm hoogte
-        int Width = Convert.ToInt32(GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Height * 1.77777776); // 16:9 aspect ratio
+        public int Width = Convert.ToInt32(GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Height * 1.77777776); // 16:9 aspect ratio
         int groundline;
         public int x;
         public int y;
@@ -38,6 +39,7 @@ namespace Game1
         int Walkloop;
         int Kickloop;
         int Punchloop;
+        int Jumploop;
         
 
         public Game1()
@@ -61,6 +63,7 @@ namespace Game1
             this.Walkloop = 0; 
             this.Kickloop = 0;
             this.Punchloop = 0;
+            this.Jumploop = 0;
             
 
         }
@@ -105,6 +108,17 @@ namespace Game1
             KICK12 = Content.Load<Texture2D>("KICK12");
             KICK13 = Content.Load<Texture2D>("KICK13");
             KICK14 = Content.Load<Texture2D>("KICK14");
+
+            JUMP1 = Content.Load<Texture2D>("JUMP1");
+            JUMP2 = Content.Load<Texture2D>("JUMP2");
+            JUMP3 = Content.Load<Texture2D>("JUMP3");
+            JUMP4 = Content.Load<Texture2D>("JUMP4");
+            JUMP5 = Content.Load<Texture2D>("JUMP5");
+            JUMP6 = Content.Load<Texture2D>("JUMP6");
+            JUMP7 = Content.Load<Texture2D>("JUMP7");
+            JUMP8 = Content.Load<Texture2D>("JUMP8");
+            JUMP9 = Content.Load<Texture2D>("JUMP9");
+            JUMP10 = Content.Load<Texture2D>("JUMP10");
 
             WALK1 = Content.Load<Texture2D>("WALK1");
             WALK2 = Content.Load<Texture2D>("WALK2");
@@ -181,7 +195,7 @@ namespace Game1
             }
             if (KEY.IsKeyDown(Keys.Left))
             {
-                this.x -= Convert.ToInt16(Height/108);
+                this.x -= Convert.ToInt16(Height / 108);
             }
             if (KEY.IsKeyDown(Keys.Right))
             {
@@ -201,11 +215,23 @@ namespace Game1
             if (this.jumpbool == true)
             {
                 int Gspeed = Convert.ToInt32(-0.2 * this.vel + 4); //deze formule is de richtingscoeficiënt van "f(x) = -0.1x^2+4x" de "+4" aan het einde is de hoogte van de sprong
-                this.y -= (Height/108)*Gspeed; // (height/108) is de zwaartekracht, kijk maar wat er gebeurt bij Height/250
+                this.y -= (Height / 108) * Gspeed; // (height/108) is de zwaartekracht, kijk maar wat er gebeurt bij Height/250
                 this.vel++;
+                if (this.vel == 0) { Jumploop++; }
+                else if (this.vel == 7) { Jumploop++; }
+                else if (this.vel == 11) { Jumploop++; }
+                else if (this.vel == 16) { Jumploop++; }
+                else if (this.vel == 19) { Jumploop++; }
+                else if (this.vel == 23) { Jumploop++; }
+                else if (this.vel == 26) { Jumploop++; }
+                else if (this.vel == 31) { Jumploop++; }
+                else if (this.vel == 34) { Jumploop++; }
+
+
                 if (this.y >= groundline)
                 {
                     this.jumpbool = false;
+                    this.Jumploop = 0;
                     this.vel = 0;
                 }
             }
@@ -245,35 +271,52 @@ namespace Game1
             else if (graphicloop == 6) { spriteBatch.Draw(BG7, new Rectangle(0, 0, Width, Height), Color.White); }
             else if (graphicloop == 7) { spriteBatch.Draw(BG8, new Rectangle(0, 0, Width, Height), Color.White); }
 
-            if (Ra == false && La == false ) //als je niet naar links loopt of naar rechts loopt dan... idle loop
+            if (jumpbool == true)
             {
-                //IDLE LOOP
-                if (Idleloop == 0) { spriteBatch.Draw(IDLE1, new Rectangle(x, y, Convert.ToInt32(Height / 5.538), Convert.ToInt32(Height / 3.898)), Color.White); }
-                else if (Idleloop == 1) { spriteBatch.Draw(IDLE2, new Rectangle(x, y, Convert.ToInt32(Height / 5.538), Convert.ToInt32(Height / 3.898)), Color.White); }
-                else if (Idleloop == 2) { spriteBatch.Draw(IDLE3, new Rectangle(x, y, Convert.ToInt32(Height / 5.538), Convert.ToInt32(Height / 3.898)), Color.White); }
-                else if (Idleloop == 3) { spriteBatch.Draw(IDLE4, new Rectangle(x, y, Convert.ToInt32(Height / 5.538), Convert.ToInt32(Height / 3.898)), Color.White); }
-                else if (Idleloop == 4) { spriteBatch.Draw(IDLE5, new Rectangle(x, y, Convert.ToInt32(Height / 5.538), Convert.ToInt32(Height / 3.898)), Color.White); }
-                else if (Idleloop == 5) { spriteBatch.Draw(IDLE6, new Rectangle(x, y, Convert.ToInt32(Height / 5.538), Convert.ToInt32(Height / 3.898)), Color.White); }
-                else if (Idleloop == 6) { spriteBatch.Draw(IDLE7, new Rectangle(x, y, Convert.ToInt32(Height / 5.538), Convert.ToInt32(Height / 3.898)), Color.White); }
-                else if (Idleloop == 7) { spriteBatch.Draw(IDLE8, new Rectangle(x, y, Convert.ToInt32(Height / 5.538), Convert.ToInt32(Height / 3.898)), Color.White); }
-                else if (Idleloop == 8) { spriteBatch.Draw(IDLE9, new Rectangle(x, y, Convert.ToInt32(Height / 5.538), Convert.ToInt32(Height / 3.898)), Color.White); }
-                else if (Idleloop == 9) { spriteBatch.Draw(IDLE10, new Rectangle(x, y, Convert.ToInt32(Height / 5.538), Convert.ToInt32(Height / 3.898)), Color.White); }
+                if (Jumploop == 0) { spriteBatch.Draw(JUMP1, new Rectangle(x, y, Convert.ToInt32(Height / 5.538), Convert.ToInt32(Height / 3.898)), Color.White); }
+                else if (Jumploop == 1) { spriteBatch.Draw(JUMP2, new Rectangle(x, y, Convert.ToInt32(Height / 5.538), Convert.ToInt32(Height / 3.898)), Color.White); }
+                else if (Jumploop == 2) { spriteBatch.Draw(JUMP3, new Rectangle(x, y, Convert.ToInt32(Height / 5.538), Convert.ToInt32(Height / 3.898)), Color.White); }
+                else if (Jumploop == 3) { spriteBatch.Draw(JUMP4, new Rectangle(x, y, Convert.ToInt32(Height / 5.538), Convert.ToInt32(Height / 3.898)), Color.White); }
+                else if (Jumploop == 4) { spriteBatch.Draw(JUMP5, new Rectangle(x, y, Convert.ToInt32(Height / 5.538), Convert.ToInt32(Height / 3.898)), Color.White); }
+                else if (Jumploop == 5) { spriteBatch.Draw(JUMP6, new Rectangle(x, y, Convert.ToInt32(Height / 5.538), Convert.ToInt32(Height / 3.898)), Color.White); }
+                else if (Jumploop == 6) { spriteBatch.Draw(JUMP7, new Rectangle(x, y, Convert.ToInt32(Height / 5.538), Convert.ToInt32(Height / 3.898)), Color.White); }
+                else if (Jumploop == 7) { spriteBatch.Draw(JUMP8, new Rectangle(x, y, Convert.ToInt32(Height / 5.538), Convert.ToInt32(Height / 3.898)), Color.White); }
+                else if (Jumploop == 8) { spriteBatch.Draw(JUMP9, new Rectangle(x, y, Convert.ToInt32(Height / 5.538), Convert.ToInt32(Height / 3.898)), Color.White); }
+                else if (Jumploop == 9) { spriteBatch.Draw(JUMP10, new Rectangle(x, y, Convert.ToInt32(Height / 5.538), Convert.ToInt32(Height / 3.898)), Color.White); }
             }
             else
             {
-                //WALK LOOP
-                if (Walkloop == 0) { spriteBatch.Draw(WALK1, new Rectangle(x, y, Convert.ToInt32(Height / 4.038), Convert.ToInt32(Height / 3.898)), Color.White); }
-                else if (Walkloop == 1) { spriteBatch.Draw(WALK2, new Rectangle(x, y, Convert.ToInt32(Height / 4.038), Convert.ToInt32(Height / 3.898)), Color.White); }
-                else if (Walkloop == 2) { spriteBatch.Draw(WALK3, new Rectangle(x, y, Convert.ToInt32(Height / 4.038), Convert.ToInt32(Height / 3.898)), Color.White); }
-                else if (Walkloop == 3) { spriteBatch.Draw(WALK4, new Rectangle(x, y, Convert.ToInt32(Height / 4.038), Convert.ToInt32(Height / 3.898)), Color.White); }
-                else if (Walkloop == 4) { spriteBatch.Draw(WALK5, new Rectangle(x, y, Convert.ToInt32(Height / 4.038), Convert.ToInt32(Height / 3.898)), Color.White); }
-                else if (Walkloop == 5) { spriteBatch.Draw(WALK6, new Rectangle(x, y, Convert.ToInt32(Height / 4.038), Convert.ToInt32(Height / 3.898)), Color.White); }
-                else if (Walkloop == 6) { spriteBatch.Draw(WALK7, new Rectangle(x, y, Convert.ToInt32(Height / 4.038), Convert.ToInt32(Height / 3.898)), Color.White); }
-                else if (Walkloop == 7) { spriteBatch.Draw(WALK8, new Rectangle(x, y, Convert.ToInt32(Height / 4.038), Convert.ToInt32(Height / 3.898)), Color.White); }
-                else if (Walkloop == 8) { spriteBatch.Draw(WALK9, new Rectangle(x, y, Convert.ToInt32(Height / 4.038), Convert.ToInt32(Height / 3.898)), Color.White); }
-                else if (Walkloop == 9) { spriteBatch.Draw(WALK10, new Rectangle(x, y, Convert.ToInt32(Height / 4.038), Convert.ToInt32(Height / 3.898)), Color.White); }
-                else if (Walkloop == 10) { spriteBatch.Draw(WALK11, new Rectangle(x, y, Convert.ToInt32(Height / 4.038), Convert.ToInt32(Height / 3.898)), Color.White); }
+                if (Ra == false && La == false) //als je niet naar links loopt of naar rechts loopt dan... idle loop
+                {
+                    //IDLE LOOP
+                    if (Idleloop == 0) { spriteBatch.Draw(IDLE1, new Rectangle(x, y, Convert.ToInt32(Height / 5.538), Convert.ToInt32(Height / 3.898)), Color.White); }
+                    else if (Idleloop == 1) { spriteBatch.Draw(IDLE2, new Rectangle(x, y, Convert.ToInt32(Height / 5.538), Convert.ToInt32(Height / 3.898)), Color.White); }
+                    else if (Idleloop == 2) { spriteBatch.Draw(IDLE3, new Rectangle(x, y, Convert.ToInt32(Height / 5.538), Convert.ToInt32(Height / 3.898)), Color.White); }
+                    else if (Idleloop == 3) { spriteBatch.Draw(IDLE4, new Rectangle(x, y, Convert.ToInt32(Height / 5.538), Convert.ToInt32(Height / 3.898)), Color.White); }
+                    else if (Idleloop == 4) { spriteBatch.Draw(IDLE5, new Rectangle(x, y, Convert.ToInt32(Height / 5.538), Convert.ToInt32(Height / 3.898)), Color.White); }
+                    else if (Idleloop == 5) { spriteBatch.Draw(IDLE6, new Rectangle(x, y, Convert.ToInt32(Height / 5.538), Convert.ToInt32(Height / 3.898)), Color.White); }
+                    else if (Idleloop == 6) { spriteBatch.Draw(IDLE7, new Rectangle(x, y, Convert.ToInt32(Height / 5.538), Convert.ToInt32(Height / 3.898)), Color.White); }
+                    else if (Idleloop == 7) { spriteBatch.Draw(IDLE8, new Rectangle(x, y, Convert.ToInt32(Height / 5.538), Convert.ToInt32(Height / 3.898)), Color.White); }
+                    else if (Idleloop == 8) { spriteBatch.Draw(IDLE9, new Rectangle(x, y, Convert.ToInt32(Height / 5.538), Convert.ToInt32(Height / 3.898)), Color.White); }
+                    else if (Idleloop == 9) { spriteBatch.Draw(IDLE10, new Rectangle(x, y, Convert.ToInt32(Height / 5.538), Convert.ToInt32(Height / 3.898)), Color.White); }
+                }
+                else
+                {
+                    //WALK LOOP
+                    if (Walkloop == 0) { spriteBatch.Draw(WALK1, new Rectangle(x, y, Convert.ToInt32(Height / 4.038), Convert.ToInt32(Height / 3.898)), Color.White); }
+                    else if (Walkloop == 1) { spriteBatch.Draw(WALK2, new Rectangle(x, y, Convert.ToInt32(Height / 4.038), Convert.ToInt32(Height / 3.898)), Color.White); }
+                    else if (Walkloop == 2) { spriteBatch.Draw(WALK3, new Rectangle(x, y, Convert.ToInt32(Height / 4.038), Convert.ToInt32(Height / 3.898)), Color.White); }
+                    else if (Walkloop == 3) { spriteBatch.Draw(WALK4, new Rectangle(x, y, Convert.ToInt32(Height / 4.038), Convert.ToInt32(Height / 3.898)), Color.White); }
+                    else if (Walkloop == 4) { spriteBatch.Draw(WALK5, new Rectangle(x, y, Convert.ToInt32(Height / 4.038), Convert.ToInt32(Height / 3.898)), Color.White); }
+                    else if (Walkloop == 5) { spriteBatch.Draw(WALK6, new Rectangle(x, y, Convert.ToInt32(Height / 4.038), Convert.ToInt32(Height / 3.898)), Color.White); }
+                    else if (Walkloop == 6) { spriteBatch.Draw(WALK7, new Rectangle(x, y, Convert.ToInt32(Height / 4.038), Convert.ToInt32(Height / 3.898)), Color.White); }
+                    else if (Walkloop == 7) { spriteBatch.Draw(WALK8, new Rectangle(x, y, Convert.ToInt32(Height / 4.038), Convert.ToInt32(Height / 3.898)), Color.White); }
+                    else if (Walkloop == 8) { spriteBatch.Draw(WALK9, new Rectangle(x, y, Convert.ToInt32(Height / 4.038), Convert.ToInt32(Height / 3.898)), Color.White); }
+                    else if (Walkloop == 9) { spriteBatch.Draw(WALK10, new Rectangle(x, y, Convert.ToInt32(Height / 4.038), Convert.ToInt32(Height / 3.898)), Color.White); }
+                    else if (Walkloop == 10) { spriteBatch.Draw(WALK11, new Rectangle(x, y, Convert.ToInt32(Height / 4.038), Convert.ToInt32(Height / 3.898)), Color.White); }
+                }
             }
+            
             
 
             spriteBatch.End();

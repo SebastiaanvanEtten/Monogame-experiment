@@ -99,3 +99,13 @@ C:\Users\Sebastiaan\Desktop\Game1\Game1\bin\Windows\x86\Debug\Content\WALK6.xnb
 C:\Users\Sebastiaan\Desktop\Game1\Game1\bin\Windows\x86\Debug\Content\WALK7.xnb
 C:\Users\Sebastiaan\Desktop\Game1\Game1\bin\Windows\x86\Debug\Content\WALK8.xnb
 C:\Users\Sebastiaan\Desktop\Game1\Game1\bin\Windows\x86\Debug\Content\WALK9.xnb
+C:\Users\Sebastiaan\Desktop\Game1\Game1\bin\Windows\x86\Debug\Content\JUMP1.xnb
+C:\Users\Sebastiaan\Desktop\Game1\Game1\bin\Windows\x86\Debug\Content\JUMP10.xnb
+C:\Users\Sebastiaan\Desktop\Game1\Game1\bin\Windows\x86\Debug\Content\JUMP2.xnb
+C:\Users\Sebastiaan\Desktop\Game1\Game1\bin\Windows\x86\Debug\Content\JUMP3.xnb
+C:\Users\Sebastiaan\Desktop\Game1\Game1\bin\Windows\x86\Debug\Content\JUMP4.xnb
+C:\Users\Sebastiaan\Desktop\Game1\Game1\bin\Windows\x86\Debug\Content\JUMP5.xnb
+C:\Users\Sebastiaan\Desktop\Game1\Game1\bin\Windows\x86\Debug\Content\JUMP6.xnb
+C:\Users\Sebastiaan\Desktop\Game1\Game1\bin\Windows\x86\Debug\Content\JUMP7.xnb
+C:\Users\Sebastiaan\Desktop\Game1\Game1\bin\Windows\x86\Debug\Content\JUMP8.xnb
+C:\Users\Sebastiaan\Desktop\Game1\Game1\bin\Windows\x86\Debug\Content\JUMP9.xnb
