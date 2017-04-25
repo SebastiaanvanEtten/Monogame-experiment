@@ -2,6 +2,7 @@
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using System.Collections.Generic;
 
 namespace Game1
 {
@@ -22,6 +23,14 @@ namespace Game1
         public Texture2D PUNCH1, PUNCH2, PUNCH3, PUNCH4, PUNCH5, PUNCH6, PUNCH7, PUNCH8, PUNCH9;
         public Texture2D JUMP1, JUMP2, JUMP3, JUMP4, JUMP5, JUMP6, JUMP7, JUMP8, JUMP9, JUMP10;
         public Texture2D WALKB1, WALKB2, WALKB3, WALKB4, WALKB5, WALKB6, WALKB7, WALKB8, WALKB9, WALKB10, WALKB11;
+
+        List<Texture2D> IdleAnimations = new List<Texture2D>();
+        List<Texture2D> KickAnimations = new List<Texture2D>();
+        List<Texture2D> WalkAnimations = new List<Texture2D>();
+        List<Texture2D> PunchAnimations = new List<Texture2D>();
+        List<Texture2D> JumpAnimations = new List<Texture2D>();
+        List<Texture2D> WalkBAnimations = new List<Texture2D>();
+
         public bool Ra;
         public bool La;
         public static int Height = GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Height; // scherm hoogte
@@ -75,76 +84,76 @@ namespace Game1
             font = Content.Load<SpriteFont>("File");
 
             // laad de sprite
-            KICK1 = Content.Load<Texture2D>("KICK1");
-            KICK2 = Content.Load<Texture2D>("KICK2");
-            KICK3 = Content.Load<Texture2D>("KICK3");
-            KICK4 = Content.Load<Texture2D>("KICK4");
-            KICK5 = Content.Load<Texture2D>("KICK5");
-            KICK6 = Content.Load<Texture2D>("KICK6");
-            KICK7 = Content.Load<Texture2D>("KICK7");
-            KICK8 = Content.Load<Texture2D>("KICK8");
-            KICK9 = Content.Load<Texture2D>("KICK9");
-            KICK10 = Content.Load<Texture2D>("KICK10");
-            KICK11 = Content.Load<Texture2D>("KICK11");
-            KICK12 = Content.Load<Texture2D>("KICK12");
-            KICK13 = Content.Load<Texture2D>("KICK13");
-            KICK14 = Content.Load<Texture2D>("KICK14");
+            KickAnimations.Add(KICK1 = Content.Load<Texture2D>("KICK1"));
+            KickAnimations.Add(KICK2 = Content.Load<Texture2D>("KICK2"));
+            KickAnimations.Add(KICK3 = Content.Load<Texture2D>("KICK3"));
+            KickAnimations.Add(KICK4 = Content.Load<Texture2D>("KICK4"));
+            KickAnimations.Add(KICK5 = Content.Load<Texture2D>("KICK5"));
+            KickAnimations.Add(KICK6 = Content.Load<Texture2D>("KICK6"));
+            KickAnimations.Add(KICK7 = Content.Load<Texture2D>("KICK7"));
+            KickAnimations.Add(KICK8 = Content.Load<Texture2D>("KICK8"));
+            KickAnimations.Add(KICK9 = Content.Load<Texture2D>("KICK9"));
+            KickAnimations.Add(KICK10 = Content.Load<Texture2D>("KICK10"));
+            KickAnimations.Add(KICK11 = Content.Load<Texture2D>("KICK11"));
+            KickAnimations.Add(KICK12 = Content.Load<Texture2D>("KICK12"));
+            KickAnimations.Add(KICK13 = Content.Load<Texture2D>("KICK13"));
+            KickAnimations.Add(KICK14 = Content.Load<Texture2D>("KICK14"));
 
-            JUMP1 = Content.Load<Texture2D>("JUMP1");
-            JUMP2 = Content.Load<Texture2D>("JUMP2");
-            JUMP3 = Content.Load<Texture2D>("JUMP3");
-            JUMP4 = Content.Load<Texture2D>("JUMP4");
-            JUMP5 = Content.Load<Texture2D>("JUMP5");
-            JUMP6 = Content.Load<Texture2D>("JUMP6");
-            JUMP7 = Content.Load<Texture2D>("JUMP7");
-            JUMP8 = Content.Load<Texture2D>("JUMP8");
-            JUMP9 = Content.Load<Texture2D>("JUMP9");
-            JUMP10 = Content.Load<Texture2D>("JUMP10");
+            JumpAnimations.Add(JUMP1 = Content.Load<Texture2D>("JUMP1"));
+            JumpAnimations.Add(JUMP2 = Content.Load<Texture2D>("JUMP2"));
+            JumpAnimations.Add(JUMP3 = Content.Load<Texture2D>("JUMP3"));
+            JumpAnimations.Add(JUMP4 = Content.Load<Texture2D>("JUMP4"));
+            JumpAnimations.Add(JUMP5 = Content.Load<Texture2D>("JUMP5"));
+            JumpAnimations.Add(JUMP6 = Content.Load<Texture2D>("JUMP6"));
+            JumpAnimations.Add(JUMP7 = Content.Load<Texture2D>("JUMP7"));
+            JumpAnimations.Add(JUMP8 = Content.Load<Texture2D>("JUMP8"));
+            JumpAnimations.Add(JUMP9 = Content.Load<Texture2D>("JUMP9"));
+            JumpAnimations.Add(JUMP10 = Content.Load<Texture2D>("JUMP10"));
 
-            WALK1 = Content.Load<Texture2D>("WALK1");
-            WALK2 = Content.Load<Texture2D>("WALK2");
-            WALK3 = Content.Load<Texture2D>("WALK3");
-            WALK4 = Content.Load<Texture2D>("WALK4");
-            WALK5 = Content.Load<Texture2D>("WALK5");
-            WALK6 = Content.Load<Texture2D>("WALK6");
-            WALK7 = Content.Load<Texture2D>("WALK7");
-            WALK8 = Content.Load<Texture2D>("WALK8");
-            WALK9 = Content.Load<Texture2D>("WALK9");
-            WALK10 = Content.Load<Texture2D>("WALK10");
-            WALK11 = Content.Load<Texture2D>("WALK11");
+            WalkAnimations.Add(WALK1 = Content.Load<Texture2D>("WALK1"));
+            WalkAnimations.Add(WALK2 = Content.Load<Texture2D>("WALK2"));
+            WalkAnimations.Add(WALK3 = Content.Load<Texture2D>("WALK3"));
+            WalkAnimations.Add(WALK4 = Content.Load<Texture2D>("WALK4"));
+            WalkAnimations.Add(WALK5 = Content.Load<Texture2D>("WALK5"));
+            WalkAnimations.Add(WALK6 = Content.Load<Texture2D>("WALK6"));
+            WalkAnimations.Add(WALK7 = Content.Load<Texture2D>("WALK7"));
+            WalkAnimations.Add(WALK8 = Content.Load<Texture2D>("WALK8"));
+            WalkAnimations.Add(WALK9 = Content.Load<Texture2D>("WALK9"));
+            WalkAnimations.Add(WALK10 = Content.Load<Texture2D>("WALK10"));
+            WalkAnimations.Add(WALK11 = Content.Load<Texture2D>("WALK11"));
 
-            WALKB1 = Content.Load<Texture2D>("WALKB1");
-            WALKB2 = Content.Load<Texture2D>("WALKB2");
-            WALKB3 = Content.Load<Texture2D>("WALKB3");
-            WALKB4 = Content.Load<Texture2D>("WALKB4");
-            WALKB5 = Content.Load<Texture2D>("WALKB5");
-            WALKB6 = Content.Load<Texture2D>("WALKB6");
-            WALKB7 = Content.Load<Texture2D>("WALKB7");
-            WALKB8 = Content.Load<Texture2D>("WALKB8");
-            WALKB9 = Content.Load<Texture2D>("WALKB9");
-            WALKB10 = Content.Load<Texture2D>("WALKB10");
-            WALKB11 = Content.Load<Texture2D>("WALKB11");
+            WalkBAnimations.Add(WALKB1 = Content.Load<Texture2D>("WALKB1"));
+            WalkBAnimations.Add(WALKB2 = Content.Load<Texture2D>("WALKB2"));
+            WalkBAnimations.Add(WALKB3 = Content.Load<Texture2D>("WALKB3"));
+            WalkBAnimations.Add(WALKB4 = Content.Load<Texture2D>("WALKB4"));
+            WalkBAnimations.Add(WALKB5 = Content.Load<Texture2D>("WALKB5"));
+            WalkBAnimations.Add(WALKB6 = Content.Load<Texture2D>("WALKB6"));
+            WalkBAnimations.Add(WALKB7 = Content.Load<Texture2D>("WALKB7"));
+            WalkBAnimations.Add(WALKB8 = Content.Load<Texture2D>("WALKB8"));
+            WalkBAnimations.Add(WALKB9 = Content.Load<Texture2D>("WALKB9"));
+            WalkBAnimations.Add(WALKB10 = Content.Load<Texture2D>("WALKB10"));
+            WalkBAnimations.Add(WALKB11 = Content.Load<Texture2D>("WALKB11"));
 
-            PUNCH1 = Content.Load<Texture2D>("PUNCH1");
-            PUNCH2 = Content.Load<Texture2D>("PUNCH2");
-            PUNCH3 = Content.Load<Texture2D>("PUNCH3");
-            PUNCH4 = Content.Load<Texture2D>("PUNCH4");
-            PUNCH5 = Content.Load<Texture2D>("PUNCH5");
-            PUNCH6 = Content.Load<Texture2D>("PUNCH6");
-            PUNCH7 = Content.Load<Texture2D>("PUNCH7");
-            PUNCH8 = Content.Load<Texture2D>("PUNCH8");
-            PUNCH9 = Content.Load<Texture2D>("PUNCH9");
+            PunchAnimations.Add(PUNCH1 = Content.Load<Texture2D>("PUNCH1"));
+            PunchAnimations.Add(PUNCH2 = Content.Load<Texture2D>("PUNCH2"));
+            PunchAnimations.Add(PUNCH3 = Content.Load<Texture2D>("PUNCH3"));
+            PunchAnimations.Add(PUNCH4 = Content.Load<Texture2D>("PUNCH4"));
+            PunchAnimations.Add(PUNCH5 = Content.Load<Texture2D>("PUNCH5"));
+            PunchAnimations.Add(PUNCH6 = Content.Load<Texture2D>("PUNCH6"));
+            PunchAnimations.Add(PUNCH7 = Content.Load<Texture2D>("PUNCH7"));
+            PunchAnimations.Add(PUNCH8 = Content.Load<Texture2D>("PUNCH8"));
+            PunchAnimations.Add(PUNCH9 = Content.Load<Texture2D>("PUNCH9"));
 
-            IDLE1 = Content.Load<Texture2D>("IDLE1");
-            IDLE2 = Content.Load<Texture2D>("IDLE2");
-            IDLE3 = Content.Load<Texture2D>("IDLE3");
-            IDLE4 = Content.Load<Texture2D>("IDLE4");
-            IDLE5 = Content.Load<Texture2D>("IDLE5");
-            IDLE6 = Content.Load<Texture2D>("IDLE6");
-            IDLE7 = Content.Load<Texture2D>("IDLE7");
-            IDLE8 = Content.Load<Texture2D>("IDLE8");
-            IDLE9 = Content.Load<Texture2D>("IDLE9");
-            IDLE10 = Content.Load<Texture2D>("IDLE10");
+            IdleAnimations.Add(IDLE1 = Content.Load<Texture2D>("IDLE1"));
+            IdleAnimations.Add(IDLE2 = Content.Load<Texture2D>("IDLE2"));
+            IdleAnimations.Add(IDLE3 = Content.Load<Texture2D>("IDLE3"));
+            IdleAnimations.Add(IDLE4 = Content.Load<Texture2D>("IDLE4"));
+            IdleAnimations.Add(IDLE5 = Content.Load<Texture2D>("IDLE5"));
+            IdleAnimations.Add(IDLE6 = Content.Load<Texture2D>("IDLE6"));
+            IdleAnimations.Add(IDLE7 = Content.Load<Texture2D>("IDLE7"));
+            IdleAnimations.Add(IDLE8 = Content.Load<Texture2D>("IDLE8"));
+            IdleAnimations.Add(IDLE9 = Content.Load<Texture2D>("IDLE9"));
+            IdleAnimations.Add(IDLE10 = Content.Load<Texture2D>("IDLE10"));
 
             BG1 = Content.Load<Texture2D>("BG1");
             BG2 = Content.Load<Texture2D>("BG2");
@@ -156,7 +165,7 @@ namespace Game1
             BG8 = Content.Load<Texture2D>("BG8");
             
             background = new Background(BG1, BG2, BG3, BG4, BG5, BG6, BG7, BG8, Width, Height);
-            player1 = new Player(groundline, Width, Height, IDLE1, IDLE2, IDLE3, IDLE4, IDLE5, IDLE6, IDLE7, IDLE8, IDLE9, IDLE10, KICK1, KICK2, KICK3, KICK4, KICK5, KICK6, KICK7, KICK8, KICK9, KICK10, KICK11, KICK12, KICK13, KICK14, WALK1, WALK2, WALK3, WALK4, WALK5, WALK6, WALK7, WALK8, WALK9, WALK10, WALK11, PUNCH1, PUNCH2, PUNCH3, PUNCH4, PUNCH5, PUNCH6, PUNCH7, PUNCH8, PUNCH9, JUMP1, JUMP2, JUMP3, JUMP4, JUMP5, JUMP6, JUMP7, JUMP8, JUMP9, JUMP10, WALKB1, WALKB2, WALKB3, WALKB4, WALKB5, WALKB6, WALKB7, WALKB8, WALKB9, WALKB10, WALKB11);
+            player1 = new Player(groundline, Width, Height, IdleAnimations, WalkAnimations, WalkBAnimations, JumpAnimations, PunchAnimations, KickAnimations);
 
             gamestate = new Gamestate(background,player1);
 
