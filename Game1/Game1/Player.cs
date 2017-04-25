@@ -37,8 +37,9 @@ namespace Game1
         public KeyboardState oldState;
         public GamePadState oldPadState;
         public GamePadState gamePadState;
+        PlayerInput Movement;
 
-        public Player(int groundline, int breed, int hoog, List<Texture2D> IdleAnimations, List<Texture2D> WalkAnimations, List<Texture2D> WalkBAnimations, List<Texture2D> JumpAnimations, List<Texture2D> PunchAnimations, List<Texture2D> KickAnimations)
+        public Player(PlayerInput Input, int groundline, int breed, int hoog, List<Texture2D> IdleAnimations, List<Texture2D> WalkAnimations, List<Texture2D> WalkBAnimations, List<Texture2D> JumpAnimations, List<Texture2D> PunchAnimations, List<Texture2D> KickAnimations)
         {
             this.IdleAnimations = IdleAnimations;
             this.WalkAnimations = WalkAnimations;
@@ -46,6 +47,7 @@ namespace Game1
             this.JumpAnimations = JumpAnimations;
             this.PunchAnimations = PunchAnimations;
             this.KickAnimations = KickAnimations;
+            this.Movement = Input;
 
             this.Height = hoog;
             this.Width = breed;
@@ -127,21 +129,21 @@ namespace Game1
             }
             else
             {
-                if (KEY.IsKeyDown(Keys.Up))
+                if (KEY.IsKeyDown(Movement.Jump))
                 {
                     this.jumpbool = true;
                 }
-                if (KEY.IsKeyDown(Keys.Down))
+                if (KEY.IsKeyDown(Movement.Duck))
                 {
                     this.y += 0;
                 }
-                if (KEY.IsKeyDown(Keys.Left))
+                if (KEY.IsKeyDown(Movement.WalkLeft))
                 {
                     this.x -= this.MoveSpeed;
                 }
-                if (KEY.IsKeyDown(Keys.Right))
+                if (KEY.IsKeyDown(Movement.WalkRight))
                 {
-                    this.x += Convert.ToInt16(Height / 98);
+                    this.x += this.MoveSpeed;
                 }
             }
             
@@ -243,50 +245,50 @@ namespace Game1
             }
             else
             {
-                if (newState.IsKeyDown(Keys.Up))
+                if (newState.IsKeyDown(Movement.Jump))
                 {
-                    if (!oldState.IsKeyDown(Keys.Up))
+                    if (!oldState.IsKeyDown(Movement.Jump))
                     {
                         //stop animatie
                     }
                 }
-                else if (oldState.IsKeyDown(Keys.Up))
+                else if (oldState.IsKeyDown(Movement.Jump))
                 {
                     //start animatie;
                 }
 
-                if (newState.IsKeyDown(Keys.Left))
+                if (newState.IsKeyDown(Movement.WalkLeft))
                 {
-                    if (!oldState.IsKeyDown(Keys.Left))
+                    if (!oldState.IsKeyDown(Movement.WalkLeft))
                     {
                         this.La = true;
                     }
                 }
-                else if (oldState.IsKeyDown(Keys.Left))
+                else if (oldState.IsKeyDown(Movement.WalkLeft))
                 {
                     this.La = false;
                 }
 
-                if (newState.IsKeyDown(Keys.Right))
+                if (newState.IsKeyDown(Movement.WalkRight))
                 {
-                    if (!oldState.IsKeyDown(Keys.Right))
+                    if (!oldState.IsKeyDown(Movement.WalkRight))
                     {
                         this.Ra = true;
                     }
                 }
-                else if (oldState.IsKeyDown(Keys.Right))
+                else if (oldState.IsKeyDown(Movement.WalkRight))
                 {
                     this.Ra = false;
                 }
 
-                if (newState.IsKeyDown(Keys.Down))
+                if (newState.IsKeyDown(Movement.Duck))
                 {
-                    if (!oldState.IsKeyDown(Keys.Down))
+                    if (!oldState.IsKeyDown(Movement.Duck))
                     {
                         // stop animatie;
                     }
                 }
-                else if (oldState.IsKeyDown(Keys.Down))
+                else if (oldState.IsKeyDown(Movement.Duck))
                 {
                     //start animatie;
                 }

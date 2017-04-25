@@ -41,7 +41,8 @@ namespace Game1
         public int mainloop;
         public int graphicloop;
         public Player speler1;
-        
+        PlayerInput Player1Movement;
+
 
         public Game1()
         {
@@ -77,6 +78,7 @@ namespace Game1
         Gamestate gamestate;
         Background background;
         IPlayer player1;
+        FloatingMan floot;
         protected override void LoadContent()
         {
             // Create a new SpriteBatch, which can be used to draw textures.
@@ -165,9 +167,10 @@ namespace Game1
             BG8 = Content.Load<Texture2D>("BG8");
             
             background = new Background(BG1, BG2, BG3, BG4, BG5, BG6, BG7, BG8, Width, Height);
-            player1 = new Player(groundline, Width, Height, IdleAnimations, WalkAnimations, WalkBAnimations, JumpAnimations, PunchAnimations, KickAnimations);
-
-            gamestate = new Gamestate(background,player1);
+            Player1Movement = new PlayerInput(Keys.Right, Keys.Left, Keys.Down, Keys.Up, Keys.X, Keys.B);
+            player1 = new Player(Player1Movement, groundline, Width, Height, IdleAnimations, WalkAnimations, WalkBAnimations, JumpAnimations, PunchAnimations, KickAnimations);
+            floot = new FloatingMan(Height,Width, IdleAnimations);
+            gamestate = new Gamestate(background,player1,floot);
 
         }
 
@@ -190,7 +193,7 @@ namespace Game1
             
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
-            
+
             //dit kijkt naar welke knop er is inegrukt en welke niet 
             
             gamestate.Update((float)gameTime.ElapsedGameTime.TotalSeconds);

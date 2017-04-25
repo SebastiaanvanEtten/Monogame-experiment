@@ -42,11 +42,13 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="Background.cs" />
+    <Compile Include="FloatingMan.cs" />
     <Compile Include="IComponent.cs" />
     <Compile Include="GameState.cs" />
     <Compile Include="Game1.cs" />
     <Compile Include="IPlayer.cs" />
     <Compile Include="Player.cs" />
+    <Compile Include="PlayerInput.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
