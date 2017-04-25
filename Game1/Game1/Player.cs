@@ -27,6 +27,7 @@ namespace Game1
         public int Punchloop;
         public int Jumploop;
         public int Animationloop;
+        public int MoveSpeed;
         List<Texture2D> IdleAnimations;
         List<Texture2D> KickAnimations;
         List<Texture2D> WalkAnimations;
@@ -49,6 +50,7 @@ namespace Game1
             this.Height = hoog;
             this.Width = breed;
             this.groundline = groundline;
+            this.MoveSpeed = Convert.ToInt16(Height / 108);
 
             this.oldState = Keyboard.GetState(); // dit word alleen in die UpdateInput() gebruikt
             this.oldPadState = GamePad.GetState(PlayerIndex.One);
@@ -97,7 +99,7 @@ namespace Game1
             {
                 if (gamePadState.ThumbSticks.Left.X > 0.5)
                 {
-                    this.x += Convert.ToInt16(Height / 108);
+                    this.x += this.MoveSpeed;
                     this.Ra = true;
                 }
                 else
@@ -106,7 +108,7 @@ namespace Game1
                 }
                 if (gamePadState.ThumbSticks.Left.X < -0.5)
                 {
-                    this.x -= Convert.ToInt16(Height / 108);
+                    this.x -= this.MoveSpeed;
                     this.La = true;
                 }
                 else
@@ -135,7 +137,7 @@ namespace Game1
                 }
                 if (KEY.IsKeyDown(Keys.Left))
                 {
-                    this.x -= Convert.ToInt16(Height / 98);
+                    this.x -= this.MoveSpeed;
                 }
                 if (KEY.IsKeyDown(Keys.Right))
                 {
@@ -157,6 +159,7 @@ namespace Game1
         {
             if (this.jumpbool == true)
             {
+                
                 int Gspeed = Convert.ToInt32(-0.2 * this.vel + 4); //deze formule is de richtingscoeficiënt van "f(x) = -0.1x^2+4x" de "+4" aan het einde is de hoogte van de sprong
                 this.y -= (Height / 108) * Gspeed; // (height/108) is de zwaartekracht, kijk maar wat er gebeurt bij Height/250
                 this.vel++;
