@@ -23,6 +23,8 @@ namespace Game1
         public Texture2D PUNCH1, PUNCH2, PUNCH3, PUNCH4, PUNCH5, PUNCH6, PUNCH7, PUNCH8, PUNCH9;
         public Texture2D JUMP1, JUMP2, JUMP3, JUMP4, JUMP5, JUMP6, JUMP7, JUMP8, JUMP9, JUMP10;
         public Texture2D WALKB1, WALKB2, WALKB3, WALKB4, WALKB5, WALKB6, WALKB7, WALKB8, WALKB9, WALKB10, WALKB11;
+        public Texture2D FM1, FM2, FM3, FM4, FM5, FM6, FM7, FM8, FM9, FM10, FM11, FM12, FM13, FM14, FM15, FM16, FM17, FM18, FM19, FM20, FM21, FM22, FM23, FM24, FM25, FM26, FM27, FM28;
+        public Texture2D DUCK1, DUCK2, DUCK3, DUCK4, DUCK5, DUCK6, DUCK7, DUCK8, DUCK9;
 
         List<Texture2D> IdleAnimations = new List<Texture2D>();
         List<Texture2D> KickAnimations = new List<Texture2D>();
@@ -30,6 +32,8 @@ namespace Game1
         List<Texture2D> PunchAnimations = new List<Texture2D>();
         List<Texture2D> JumpAnimations = new List<Texture2D>();
         List<Texture2D> WalkBAnimations = new List<Texture2D>();
+        List<Texture2D> DuckAnimations = new List<Texture2D>();
+        List<Texture2D> FlyThing = new List<Texture2D>();
 
         public bool Ra;
         public bool La;
@@ -86,6 +90,47 @@ namespace Game1
             font = Content.Load<SpriteFont>("File");
 
             // laad de sprite
+
+            FlyThing.Add(FM1 = Content.Load<Texture2D>("F100"));
+            FlyThing.Add(FM2 = Content.Load<Texture2D>("F101"));
+            FlyThing.Add(FM3 = Content.Load<Texture2D>("F102"));
+            FlyThing.Add(FM4 = Content.Load<Texture2D>("F103"));
+            FlyThing.Add(FM5 = Content.Load<Texture2D>("F104"));
+            FlyThing.Add(FM6 = Content.Load<Texture2D>("F105"));
+            FlyThing.Add(FM7 = Content.Load<Texture2D>("F106"));
+            FlyThing.Add(FM8 = Content.Load<Texture2D>("F107"));
+            FlyThing.Add(FM9 = Content.Load<Texture2D>("F108"));
+            FlyThing.Add(FM10 = Content.Load<Texture2D>("F109"));
+            FlyThing.Add(FM11 = Content.Load<Texture2D>("F110"));
+            FlyThing.Add(FM12 = Content.Load<Texture2D>("F111"));
+            FlyThing.Add(FM13 = Content.Load<Texture2D>("F112"));
+            FlyThing.Add(FM14 = Content.Load<Texture2D>("F113"));
+            FlyThing.Add(FM15 = Content.Load<Texture2D>("F114"));
+            FlyThing.Add(FM16 = Content.Load<Texture2D>("F115"));
+            FlyThing.Add(FM17 = Content.Load<Texture2D>("F116"));
+            FlyThing.Add(FM18 = Content.Load<Texture2D>("F117"));
+            FlyThing.Add(FM19= Content.Load<Texture2D>("F118"));
+            FlyThing.Add(FM20 = Content.Load<Texture2D>("F119"));
+            FlyThing.Add(FM21 = Content.Load<Texture2D>("F120"));
+            FlyThing.Add(FM22 = Content.Load<Texture2D>("F121"));
+            FlyThing.Add(FM23 = Content.Load<Texture2D>("F122"));
+            FlyThing.Add(FM24 = Content.Load<Texture2D>("F123"));
+            FlyThing.Add(FM25 = Content.Load<Texture2D>("F124"));
+            FlyThing.Add(FM26 = Content.Load<Texture2D>("F125"));
+            FlyThing.Add(FM27 = Content.Load<Texture2D>("F126"));
+            FlyThing.Add(FM28 = Content.Load<Texture2D>("F127"));
+
+            DuckAnimations.Add(DUCK1 = Content.Load<Texture2D>("DUCK1"));
+            DuckAnimations.Add(DUCK2 = Content.Load<Texture2D>("DUCK2"));
+            DuckAnimations.Add(DUCK3 = Content.Load<Texture2D>("DUCK3"));
+            DuckAnimations.Add(DUCK4 = Content.Load<Texture2D>("DUCK4"));
+            DuckAnimations.Add(DUCK5 = Content.Load<Texture2D>("DUCK5"));
+            DuckAnimations.Add(DUCK6 = Content.Load<Texture2D>("DUCK6"));
+            DuckAnimations.Add(DUCK7 = Content.Load<Texture2D>("DUCK7"));
+            DuckAnimations.Add(DUCK8 = Content.Load<Texture2D>("DUCK8"));
+            DuckAnimations.Add(DUCK9 = Content.Load<Texture2D>("DUCK9"));
+
+
             KickAnimations.Add(KICK1 = Content.Load<Texture2D>("KICK1"));
             KickAnimations.Add(KICK2 = Content.Load<Texture2D>("KICK2"));
             KickAnimations.Add(KICK3 = Content.Load<Texture2D>("KICK3"));
@@ -99,7 +144,6 @@ namespace Game1
             KickAnimations.Add(KICK11 = Content.Load<Texture2D>("KICK11"));
             KickAnimations.Add(KICK12 = Content.Load<Texture2D>("KICK12"));
             KickAnimations.Add(KICK13 = Content.Load<Texture2D>("KICK13"));
-            KickAnimations.Add(KICK14 = Content.Load<Texture2D>("KICK14"));
 
             JumpAnimations.Add(JUMP1 = Content.Load<Texture2D>("JUMP1"));
             JumpAnimations.Add(JUMP2 = Content.Load<Texture2D>("JUMP2"));
@@ -168,8 +212,8 @@ namespace Game1
             
             background = new Background(BG1, BG2, BG3, BG4, BG5, BG6, BG7, BG8, Width, Height);
             Player1Movement = new PlayerInput(Keys.Right, Keys.Left, Keys.Down, Keys.Up, Keys.X, Keys.B);
-            player1 = new Player(Player1Movement, groundline, Width, Height, IdleAnimations, WalkAnimations, WalkBAnimations, JumpAnimations, PunchAnimations, KickAnimations);
-            floot = new FloatingMan(Height,Width, IdleAnimations);
+            player1 = new Player(Player1Movement, groundline, Width, Height, IdleAnimations, WalkAnimations, WalkBAnimations, JumpAnimations, PunchAnimations, KickAnimations, DuckAnimations);
+            floot = new FloatingMan(Height,Width,FlyThing,font);
             gamestate = new Gamestate(background,player1,floot);
 
         }

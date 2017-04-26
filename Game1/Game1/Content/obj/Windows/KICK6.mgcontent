@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PipelineBuildEvent xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <SourceFile>C:/Users/Sebastiaan/Desktop/Game1 - kopie/Game1/Content/KICK6.png</SourceFile>
-  <SourceTime>2017-04-23T17:26:30.0616708+02:00</SourceTime>
+  <SourceTime>2017-04-25T21:32:39.8424038+02:00</SourceTime>
   <DestFile>C:/Users/Sebastiaan/Desktop/Game1 - kopie/Game1/Content/bin/Windows/KICK6.xnb</DestFile>
-  <DestTime>2017-04-24T11:49:24.6681929+02:00</DestTime>
+  <DestTime>2017-04-25T21:56:39.2724663+02:00</DestTime>
   <Importer>TextureImporter</Importer>
   <ImporterTime>2017-03-01T16:05:36+01:00</ImporterTime>
   <Processor>TextureProcessor</Processor>

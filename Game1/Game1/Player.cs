@@ -15,6 +15,12 @@ namespace Game1
         public int x;
         public int y;
         public bool jumpbool;
+        public bool IsPunching;
+        public bool IsKicking;
+        public bool IsDucking;
+
+        public int KickStart;
+        public int PunchStart;
         public int vel;
         public bool Ra;
         public bool La;
@@ -27,6 +33,7 @@ namespace Game1
         public int Punchloop;
         public int Jumploop;
         public int Animationloop;
+        public int Duckloop;
         public int MoveSpeed;
         List<Texture2D> IdleAnimations;
         List<Texture2D> KickAnimations;
@@ -34,12 +41,13 @@ namespace Game1
         List<Texture2D> PunchAnimations;
         List<Texture2D> JumpAnimations;
         List<Texture2D> WalkBAnimations;
+        List<Texture2D> DuckAnimations;
         public KeyboardState oldState;
         public GamePadState oldPadState;
         public GamePadState gamePadState;
         PlayerInput Movement;
 
-        public Player(PlayerInput Input, int groundline, int breed, int hoog, List<Texture2D> IdleAnimations, List<Texture2D> WalkAnimations, List<Texture2D> WalkBAnimations, List<Texture2D> JumpAnimations, List<Texture2D> PunchAnimations, List<Texture2D> KickAnimations)
+        public Player(PlayerInput Input, int groundline, int breed, int hoog, List<Texture2D> IdleAnimations, List<Texture2D> WalkAnimations, List<Texture2D> WalkBAnimations, List<Texture2D> JumpAnimations, List<Texture2D> PunchAnimations, List<Texture2D> KickAnimations, List<Texture2D> DuckAnimations)
         {
             this.IdleAnimations = IdleAnimations;
             this.WalkAnimations = WalkAnimations;
@@ -47,6 +55,7 @@ namespace Game1
             this.JumpAnimations = JumpAnimations;
             this.PunchAnimations = PunchAnimations;
             this.KickAnimations = KickAnimations;
+            this.DuckAnimations = DuckAnimations;
             this.Movement = Input;
 
             this.Height = hoog;
@@ -72,22 +81,45 @@ namespace Game1
 
         public void Update(float dt)
         {
+            
             Animationloop++;
-            if (Animationloop % 4 == 0)
-            { // elke % 6 updaten de animaties, dit is gwn om de snelheid van de animaties aan te passen (als dat nodig is)
-                Idleloop++;
+            if (Animationloop % 3 == 0)
+            {
                 Kickloop++;
                 Punchloop++;
+            }
+            if (Animationloop % 4 == 0)
+            { 
+                Idleloop++;
                 Walkloop++;
+                if (this.IsDucking == true)
+                {
+                    Duckloop++;
+                }
+                
             }
 
             UpdateInput();
             //resets de loops individueel, hangt af van hoeveel plaatjes er in de loop zitten
-            if (Idleloop > IdleAnimations.Count()) { Idleloop = 0; }
-            if (Walkloop > WalkAnimations.Count()) { Walkloop = 0; }
+            if (Idleloop == IdleAnimations.Count()) { Idleloop = 0; }
+            if (Walkloop == WalkAnimations.Count()) { Walkloop = 0; }
+            if (Duckloop == DuckAnimations.Count())
+            {
+                if (this.IsDucking == true)
+                {
+                    this.Duckloop = 4;
+                }
+                else
+                {
+                    this.Duckloop = 0;
+                }
+            }
+            
             this.Walk();
             this.Jump();
             this.Logic();
+            this.Kick();
+            this.Punch();
         }
 
         public void Walk()
@@ -99,7 +131,7 @@ namespace Game1
 
             if (gamePadState.IsConnected)
             {
-                if (gamePadState.ThumbSticks.Left.X > 0.5)
+                if (gamePadState.ThumbSticks.Left.X > 0.5 && this.IsDucking == false)
                 {
                     this.x += this.MoveSpeed;
                     this.Ra = true;
@@ -108,7 +140,7 @@ namespace Game1
                 {
                     this.Ra = false;
                 }
-                if (gamePadState.ThumbSticks.Left.X < -0.5)
+                if (gamePadState.ThumbSticks.Left.X < -0.5 && this.IsDucking == false)
                 {
                     this.x -= this.MoveSpeed;
                     this.La = true;
@@ -121,10 +153,26 @@ namespace Game1
                 {
                     this.jumpbool = true;
                 }
-                if (gamePadState.ThumbSticks.Left.Y > 0.5)
+                if ((gamePadState.Buttons.B == ButtonState.Pressed) && (Kickloop - KickStart > KickAnimations.Count))
                 {
-                    this.y -= 0;
-                    // duck()
+                    Kickloop = 0;
+                    KickStart = Kickloop;
+                    this.IsKicking = true;
+                }
+                if ((gamePadState.Buttons.X == ButtonState.Pressed) && (Punchloop - PunchStart > PunchAnimations.Count))
+                {
+                    Punchloop = 0;
+                    PunchStart = Punchloop;
+                    this.IsPunching = true;
+                }
+                if (gamePadState.ThumbSticks.Left.Y < -0.5)
+                {
+                    this.IsDucking = true;
+                }
+                else
+                {
+                    this.IsDucking = false;
+                    this.Duckloop = 0;
                 }
             }
             else
@@ -137,13 +185,26 @@ namespace Game1
                 {
                     this.y += 0;
                 }
-                if (KEY.IsKeyDown(Movement.WalkLeft))
+                if (KEY.IsKeyDown(Movement.WalkLeft) && this.IsDucking == false)
                 {
                     this.x -= this.MoveSpeed;
                 }
-                if (KEY.IsKeyDown(Movement.WalkRight))
+                if (KEY.IsKeyDown(Movement.WalkRight) && this.IsDucking == false)
                 {
                     this.x += this.MoveSpeed;
+                }
+                if (KEY.IsKeyDown(Movement.Kick) && (Kickloop - KickStart > KickAnimations.Count))
+                {
+                    Kickloop = 0;
+                    KickStart = Kickloop;
+                    this.IsKicking = true;
+                }
+
+                if (KEY.IsKeyDown(Movement.Punch) && (Punchloop - PunchStart > PunchAnimations.Count))
+                {
+                    Punchloop = 0;
+                    PunchStart = Punchloop;
+                    this.IsPunching = true;
                 }
             }
             
@@ -161,12 +222,12 @@ namespace Game1
         {
             if (this.jumpbool == true)
             {
-                
+                this.MoveSpeed = Convert.ToInt16(Height / 98);
                 int Gspeed = Convert.ToInt32(-0.2 * this.vel + 4); //deze formule is de richtingscoeficiënt van "f(x) = -0.1x^2+4x" de "+4" aan het einde is de hoogte van de sprong
                 this.y -= (Height / 108) * Gspeed; // (height/108) is de zwaartekracht, kijk maar wat er gebeurt bij Height/250
                 this.vel++;
                 if (this.vel == 0) { Jumploop++; }
-                else if (this.vel == 7) { Jumploop++; }
+                else if (this.vel == 7) { Jumploop++;}
                 else if (this.vel == 11) { Jumploop++; }
                 else if (this.vel == 16) { Jumploop++; }
                 else if (this.vel == 19) { Jumploop++; }
@@ -178,6 +239,7 @@ namespace Game1
 
                 if (this.y >= groundline)
                 {
+                    this.MoveSpeed = Convert.ToInt16(Height / 108);
                     this.jumpbool = false;
                     this.Jumploop = 0;
                     this.vel = 0;
@@ -185,33 +247,86 @@ namespace Game1
             }
         }
 
+        public void Kick()
+        {
+            if (this.IsKicking)
+            {
+                if (Kickloop == 5)
+                {
+                    Console.WriteLine("hey");
+                }
+
+                if (this.Kickloop == KickAnimations.Count())
+                {
+                    IsKicking = false;
+
+                }
+            }
+        }
+
+        public void Punch()
+        {
+            if (this.IsPunching)
+            {
+
+                if (this.Punchloop == PunchAnimations.Count())
+                {
+                    IsPunching = false;
+
+                }
+            }
+        }
+
         public void Draw(SpriteBatch spriteBatch)
         {
-            if (jumpbool == true)
+            if (IsKicking)
             {
-                spriteBatch.Draw(JumpAnimations[Jumploop], new Rectangle(x, y, Convert.ToInt32(Height / 5.538), Convert.ToInt32(Height / 3.898)), Color.White);
+                //Kick LOOP
+                spriteBatch.Draw(KickAnimations[Kickloop % KickAnimations.Count()], new Rectangle(x, y, Convert.ToInt32(Height / 2.938), Convert.ToInt32(Height / 3.898)), Color.White);
+
+            }
+            else if (IsPunching)
+            {
+                //Punch LOOP
+                spriteBatch.Draw(PunchAnimations[Punchloop % PunchAnimations.Count()], new Rectangle(x, y, Convert.ToInt32(Height / 4.038), Convert.ToInt32(Height / 3.898)), Color.White);
 
             }
             else
             {
-                if (Ra == false && La == false) //als je niet naar links loopt of naar rechts loopt dan... idle loop
+                if (jumpbool == true)
                 {
-                    //IDLE LOOP
-                    spriteBatch.Draw(IdleAnimations[Idleloop % IdleAnimations.Count()], new Rectangle(x, y, Convert.ToInt32(Height / 5.538), Convert.ToInt32(Height / 3.898)), Color.White);
+                    spriteBatch.Draw(JumpAnimations[Jumploop], new Rectangle(x, y, Convert.ToInt32(Height / 5.538), Convert.ToInt32(Height / 3.898)), Color.White);
 
                 }
-                else if (Ra == true)
+                else if (this.IsDucking)
                 {
-                    //WALK LOOP
-                    spriteBatch.Draw(WalkAnimations[Walkloop % WalkAnimations.Count()], new Rectangle(x, y, Convert.ToInt32(Height / 4.038), Convert.ToInt32(Height / 3.898)), Color.White);
+                    //DUCK LOOP
+                    spriteBatch.Draw(DuckAnimations[Duckloop], new Rectangle(x, y, Convert.ToInt32(Height / 4.238), Convert.ToInt32(Height / 3.898)), Color.White);
 
                 }
                 else
                 {
-                    spriteBatch.Draw(WalkBAnimations[Walkloop % WalkBAnimations.Count()], new Rectangle(x, y, Convert.ToInt32(Height / 4.038), Convert.ToInt32(Height / 3.898)), Color.White);
+                    if (La == true) //als je niet naar links loopt of naar rechts loopt dan... idle loop
+                    {
 
+                        spriteBatch.Draw(WalkBAnimations[Walkloop % WalkBAnimations.Count()], new Rectangle(x, y, Convert.ToInt32(Height / 4.038), Convert.ToInt32(Height / 3.898)), Color.White);
+
+                    }
+                    else if (Ra == true)
+                    {
+                        //WALK LOOP
+                        spriteBatch.Draw(WalkAnimations[Walkloop % WalkAnimations.Count()], new Rectangle(x, y, Convert.ToInt32(Height / 4.038), Convert.ToInt32(Height / 3.898)), Color.White);
+
+                    }
+
+                    else
+                    {   //IDLE LOOP
+
+                        spriteBatch.Draw(IdleAnimations[Idleloop % IdleAnimations.Count()], new Rectangle(x, y, Convert.ToInt32(Height / 5.538), Convert.ToInt32(Height / 3.898)), Color.White);
+                    }
                 }
             }
+            
         }
 
 
@@ -285,12 +400,14 @@ namespace Game1
                 {
                     if (!oldState.IsKeyDown(Movement.Duck))
                     {
-                        // stop animatie;
+                        this.IsDucking = true;
+                        
                     }
                 }
                 else if (oldState.IsKeyDown(Movement.Duck))
                 {
-                    //start animatie;
+                    this.IsDucking = false;
+                    this.Duckloop = 0;
                 }
 
                 // Update saved state.

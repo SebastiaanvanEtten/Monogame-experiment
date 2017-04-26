@@ -16,6 +16,7 @@ namespace Game1
         public Keys Punch;
         public Keys WalkLeft;
         public Keys WalkRight;
+        
 
         public PlayerInput(Keys walkright, Keys walkleft, Keys duck, Keys jump, Keys punch, Keys kick)
         {
