@@ -207,3 +207,5 @@ C:\Users\Sebastiaan\Desktop\Game1 - kopie\Game1\bin\Windows\x86\Debug\Content\WA
 C:\Users\Sebastiaan\Desktop\Game1 - kopie\Game1\bin\Windows\x86\Debug\Content\WALKB7.xnb
 C:\Users\Sebastiaan\Desktop\Game1 - kopie\Game1\bin\Windows\x86\Debug\Content\WALKB8.xnb
 C:\Users\Sebastiaan\Desktop\Game1 - kopie\Game1\bin\Windows\x86\Debug\Content\WALKB9.xnb
+C:\Users\Sebastiaan\Documents\GitHub\Monogame-experiment\Game1\Game1\obj\x86\Debug\Game1.exe
+C:\Users\Sebastiaan\Documents\GitHub\Monogame-experiment\Game1\Game1\obj\x86\Debug\Game1.pdb
