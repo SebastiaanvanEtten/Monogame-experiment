@@ -16,9 +16,10 @@ namespace Game1
         public Keys Punch;
         public Keys WalkLeft;
         public Keys WalkRight;
+        public PlayerIndex index;
         
 
-        public PlayerInput(Keys walkright, Keys walkleft, Keys duck, Keys jump, Keys punch, Keys kick)
+        public PlayerInput(Keys walkright, Keys walkleft, Keys duck, Keys jump, Keys punch, Keys kick, PlayerIndex index)
         {
             this.WalkRight = walkright;
             this.WalkLeft = walkleft;
@@ -26,6 +27,7 @@ namespace Game1
             this.Jump = jump;
             this.Punch = punch;
             this.Kick = kick;
+            this.index = index;
         }
     }
 }

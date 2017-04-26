@@ -125,7 +125,7 @@ namespace Game1
         public void Walk()
         {
             KeyboardState KEY = Keyboard.GetState();
-            GamePadState gamePadState = GamePad.GetState(PlayerIndex.One);
+            GamePadState gamePadState = GamePad.GetState(Movement.index);
 
 
 

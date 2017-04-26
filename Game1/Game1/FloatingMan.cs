@@ -22,7 +22,6 @@ namespace Game1
         private int amplitude;
         private int mainloop;
         private bool active;
-        private bool halfway;
         private bool leaving;
         private int stoptimer;
         SpriteFont font;
@@ -50,7 +49,7 @@ namespace Game1
         public void activate()
         {
             this.active = true;
-            this.MoveSpeed = 10;
+            this.MoveSpeed = Convert.ToInt32(Height / 108);
         }
 
         public void Draw(SpriteBatch spriteBatch)
@@ -73,25 +72,17 @@ namespace Game1
             {
                 if (this.x > (Width / 2) - ((Height / 5)) && this.leaving == false)
                 {
-                    this.halfway = true;
-                }
-
-                if (halfway == true)
-                {
                     this.x -= this.MoveSpeed;
                     this.stoptimer++;
                     if (stoptimer > 180)
                     {
-                        this.halfway = false;
                         this.leaving = true;
                     }
-
                 }
                 this.x += this.MoveSpeed;
                 
                 if (this.x > Width)
                 {
-                    this.halfway = false;
                     this.active = false;
                     this.leaving = false;
                     this.x = -(Height / 3);

@@ -243,3 +243,4 @@ C:\Users\Sebastiaan\Desktop\Game1 - kopie\Game1\bin\Windows\x86\Debug\Content\DU
 C:\Users\Sebastiaan\Desktop\Game1 - kopie\Game1\bin\Windows\x86\Debug\Content\DUCK7.xnb
 C:\Users\Sebastiaan\Desktop\Game1 - kopie\Game1\bin\Windows\x86\Debug\Content\DUCK8.xnb
 C:\Users\Sebastiaan\Desktop\Game1 - kopie\Game1\bin\Windows\x86\Debug\Content\DUCK9.xnb
+C:\Users\Sebastiaan\Desktop\Game1 - kopie\Game1\bin\Windows\x86\Debug\Content\KICK14.xnb

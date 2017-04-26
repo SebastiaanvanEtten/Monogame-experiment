@@ -211,7 +211,8 @@ namespace Game1
             BG8 = Content.Load<Texture2D>("BG8");
             
             background = new Background(BG1, BG2, BG3, BG4, BG5, BG6, BG7, BG8, Width, Height);
-            Player1Movement = new PlayerInput(Keys.Right, Keys.Left, Keys.Down, Keys.Up, Keys.X, Keys.B);
+            Player1Movement = new PlayerInput(Keys.Right, Keys.Left, Keys.Down, Keys.Up, Keys.O, Keys.P, PlayerIndex.One);
+            Player2Movement = new PlayerInput(Keys.D, Keys.A, Keys.S, Keys.W, Keys.C, Keys.V, PlayerIndex.Two);
             player1 = new Player(Player1Movement, groundline, Width, Height, IdleAnimations, WalkAnimations, WalkBAnimations, JumpAnimations, PunchAnimations, KickAnimations, DuckAnimations);
             floot = new FloatingMan(Height,Width,FlyThing,font);
             gamestate = new Gamestate(background,player1,floot);
