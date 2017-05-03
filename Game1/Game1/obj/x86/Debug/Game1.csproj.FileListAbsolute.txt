@@ -244,3 +244,16 @@ C:\Users\Sebastiaan\Desktop\Game1 - kopie\Game1\bin\Windows\x86\Debug\Content\DU
 C:\Users\Sebastiaan\Desktop\Game1 - kopie\Game1\bin\Windows\x86\Debug\Content\DUCK8.xnb
 C:\Users\Sebastiaan\Desktop\Game1 - kopie\Game1\bin\Windows\x86\Debug\Content\DUCK9.xnb
 C:\Users\Sebastiaan\Desktop\Game1 - kopie\Game1\bin\Windows\x86\Debug\Content\KICK14.xnb
+C:\Users\Sebastiaan\Desktop\Game1 - kopie\Game1\bin\Windows\x86\Debug\Content\Whoosh.wma
+C:\Users\Sebastiaan\Desktop\Game1 - kopie\Game1\bin\Windows\x86\Debug\Content\Whoosh.xnb
+C:\Users\Sebastiaan\Desktop\Game1 - kopie\Game1\bin\Windows\x86\Debug\Content\JKICK1.xnb
+C:\Users\Sebastiaan\Desktop\Game1 - kopie\Game1\bin\Windows\x86\Debug\Content\JKICK2.xnb
+C:\Users\Sebastiaan\Desktop\Game1 - kopie\Game1\bin\Windows\x86\Debug\Content\JKICK3.xnb
+C:\Users\Sebastiaan\Desktop\Game1 - kopie\Game1\bin\Windows\x86\Debug\Content\JKICK4.xnb
+C:\Users\Sebastiaan\Desktop\Game1 - kopie\Game1\bin\Windows\x86\Debug\Content\JKICK5.xnb
+C:\Users\Sebastiaan\Desktop\Game1 - kopie\Game1\bin\Windows\x86\Debug\Content\JKICK6.xnb
+C:\Users\Sebastiaan\Desktop\Game1 - kopie\Game1\bin\Windows\x86\Debug\Content\JKICK7.xnb
+C:\Users\Sebastiaan\Desktop\Game1 - kopie\Game1\bin\Windows\x86\Debug\Content\JPUNCH1.xnb
+C:\Users\Sebastiaan\Desktop\Game1 - kopie\Game1\bin\Windows\x86\Debug\Content\JPUNCH2.xnb
+C:\Users\Sebastiaan\Desktop\Game1 - kopie\Game1\bin\Windows\x86\Debug\Content\JPUNCH3.xnb
+C:\Users\Sebastiaan\Desktop\Game1 - kopie\Game1\bin\Windows\x86\Debug\Content\JPUNCH4.xnb

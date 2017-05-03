@@ -6,6 +6,8 @@ using System.Threading.Tasks;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using Microsoft.Xna.Framework.Audio;
+using Microsoft.Xna.Framework.Media;
 
 namespace Game1
 {
@@ -31,6 +33,7 @@ namespace Game1
         public int Walkloop;
         public int Kickloop;
         public int Punchloop;
+        public int JKickloop;
         public int Jumploop;
         public int Animationloop;
         public int Duckloop;
@@ -42,12 +45,16 @@ namespace Game1
         List<Texture2D> JumpAnimations;
         List<Texture2D> WalkBAnimations;
         List<Texture2D> DuckAnimations;
+        List<Texture2D> JKickAnimations;
+        List<Texture2D> JPunchAnimations;
+        private Song KickSound;
         public KeyboardState oldState;
         public GamePadState oldPadState;
         public GamePadState gamePadState;
         PlayerInput Movement;
+        Healthbar healthbar;
 
-        public Player(PlayerInput Input, int groundline, int breed, int hoog, List<Texture2D> IdleAnimations, List<Texture2D> WalkAnimations, List<Texture2D> WalkBAnimations, List<Texture2D> JumpAnimations, List<Texture2D> PunchAnimations, List<Texture2D> KickAnimations, List<Texture2D> DuckAnimations)
+        public Player(Healthbar bar, List<Texture2D> JKickAnimations, List<Texture2D> JPunchAnimations, Song KickSound, PlayerInput Input, int groundline, int breed, int hoog, List<Texture2D> IdleAnimations, List<Texture2D> WalkAnimations, List<Texture2D> WalkBAnimations, List<Texture2D> JumpAnimations, List<Texture2D> PunchAnimations, List<Texture2D> KickAnimations, List<Texture2D> DuckAnimations)
         {
             this.IdleAnimations = IdleAnimations;
             this.WalkAnimations = WalkAnimations;
@@ -56,7 +63,13 @@ namespace Game1
             this.PunchAnimations = PunchAnimations;
             this.KickAnimations = KickAnimations;
             this.DuckAnimations = DuckAnimations;
+            this.JKickAnimations = JKickAnimations;
+            this.JPunchAnimations = JPunchAnimations;
+            this.healthbar = bar;
+
             this.Movement = Input;
+
+            this.KickSound = KickSound;
 
             this.Height = hoog;
             this.Width = breed;
@@ -81,12 +94,24 @@ namespace Game1
 
         public void Update(float dt)
         {
+            healthbar.Update(dt);
             
+            if (IsPunching)
+            {
+                healthbar.GetHit(20);
+            }
+
+
             Animationloop++;
             if (Animationloop % 3 == 0)
             {
                 Kickloop++;
                 Punchloop++;
+
+                if (jumpbool == true && IsKicking == true && JKickloop < 4)
+                {
+                    JKickloop++;
+                }
             }
             if (Animationloop % 4 == 0)
             { 
@@ -96,7 +121,7 @@ namespace Game1
                 {
                     Duckloop++;
                 }
-                
+
             }
 
             UpdateInput();
@@ -104,7 +129,7 @@ namespace Game1
             if (Idleloop == IdleAnimations.Count()) { Idleloop = 0; }
             if (Walkloop == WalkAnimations.Count()) { Walkloop = 0; }
             if (Duckloop == DuckAnimations.Count())
-            {
+                {
                 if (this.IsDucking == true)
                 {
                     this.Duckloop = 4;
@@ -183,7 +208,7 @@ namespace Game1
                 }
                 if (KEY.IsKeyDown(Movement.Duck))
                 {
-                    this.y += 0;
+                    this.y -= 0;
                 }
                 if (KEY.IsKeyDown(Movement.WalkLeft) && this.IsDucking == false)
                 {
@@ -193,14 +218,15 @@ namespace Game1
                 {
                     this.x += this.MoveSpeed;
                 }
-                if (KEY.IsKeyDown(Movement.Kick) && (Kickloop - KickStart > KickAnimations.Count))
+                if (KEY.IsKeyDown(Movement.Kick) && (Kickloop - KickStart > KickAnimations.Count) && this.IsPunching == false)
                 {
                     Kickloop = 0;
+                    JKickloop = 0;
                     KickStart = Kickloop;
                     this.IsKicking = true;
                 }
 
-                if (KEY.IsKeyDown(Movement.Punch) && (Punchloop - PunchStart > PunchAnimations.Count))
+                if (KEY.IsKeyDown(Movement.Punch) && (Punchloop - PunchStart > PunchAnimations.Count) && this.IsKicking == false)
                 {
                     Punchloop = 0;
                     PunchStart = Punchloop;
@@ -216,6 +242,8 @@ namespace Game1
             {
                 this.y = groundline;
             }
+            if (this.x < 0) { this.x = 0; }
+            if (this.x > Width - (Convert.ToInt32(Height / 5.538))) { this.x = Width - (Convert.ToInt32(Height / 5.538)); }
         }
 
         public void Jump()
@@ -255,7 +283,7 @@ namespace Game1
                 {
                     Console.WriteLine("hey");
                 }
-
+                this.x += Convert.ToInt32(Height/540);
                 if (this.Kickloop == KickAnimations.Count())
                 {
                     IsKicking = false;
@@ -279,10 +307,28 @@ namespace Game1
 
         public void Draw(SpriteBatch spriteBatch)
         {
+            healthbar.Draw(spriteBatch);
+
             if (IsKicking)
             {
+                if (Kickloop == 1)
+                {
+                    MediaPlayer.Play(KickSound);
+                }
+
                 //Kick LOOP
-                spriteBatch.Draw(KickAnimations[Kickloop % KickAnimations.Count()], new Rectangle(x, y, Convert.ToInt32(Height / 2.938), Convert.ToInt32(Height / 3.898)), Color.White);
+                if (jumpbool == true)
+                {
+                    spriteBatch.Draw(JKickAnimations[JKickloop % JKickAnimations.Count()], new Rectangle(x, y, Convert.ToInt32(Height / 3.238), Convert.ToInt32(Height / 3.798)), Color.White);
+                }
+
+               
+                else
+                {
+                    spriteBatch.Draw(KickAnimations[Kickloop % KickAnimations.Count()], new Rectangle(x, y, Convert.ToInt32(Height / 2.938), Convert.ToInt32(Height / 3.898)), Color.White);
+
+                }
+
 
             }
             else if (IsPunching)
@@ -295,7 +341,7 @@ namespace Game1
             {
                 if (jumpbool == true)
                 {
-                    spriteBatch.Draw(JumpAnimations[Jumploop], new Rectangle(x, y, Convert.ToInt32(Height / 5.538), Convert.ToInt32(Height / 3.898)), Color.White);
+                    spriteBatch.Draw(JumpAnimations[Jumploop], new Rectangle(x, y, Convert.ToInt32(Height / 5.138), Convert.ToInt32(Height / 3.498)), Color.White);
 
                 }
                 else if (this.IsDucking)
@@ -328,6 +374,8 @@ namespace Game1
             }
             
         }
+
+        
 
 
         private void UpdateInput()
@@ -370,6 +418,18 @@ namespace Game1
                 else if (oldState.IsKeyDown(Movement.Jump))
                 {
                     //start animatie;
+                }
+
+                if (newState.IsKeyDown(Movement.Kick))
+                {
+                    if (!oldState.IsKeyDown(Movement.Kick))
+                    {
+                        //start
+                    }
+                }
+                else if (oldState.IsKeyDown(Movement.Kick))
+                {
+                    //stop;
                 }
 
                 if (newState.IsKeyDown(Movement.WalkLeft))
