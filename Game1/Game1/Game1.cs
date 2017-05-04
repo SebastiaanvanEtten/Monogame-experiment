@@ -45,7 +45,7 @@ namespace Game1
 
         public bool Ra;
         public bool La;
-        public static int Height = GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Height; // scherm hoogte
+        public static int Height = 480;// GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Height; // scherm hoogte
         public static int Width = Convert.ToInt32(Height * 1.77777776); // 16:9 aspect ratio
         public int groundline;
         Color backColor = Color.CornflowerBlue;
@@ -53,12 +53,14 @@ namespace Game1
         public int mainloop;
         public int graphicloop;
         public Player speler1;
+        public double cooldown;
         PlayerInput Player1Movement;
         PlayerInput Player2Movement;
 
 
         public Game1()
         {
+            TargetElapsedTime = new TimeSpan(30);
             graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
             graphics.PreferredBackBufferWidth = Width;
@@ -70,6 +72,7 @@ namespace Game1
             this.mainloop = 0; // mainloop wordt elke gamtick met +1 omhoog gedaan
             this.Ra = false; // Right active, is alleen true als je rechter pijltjestoets indrukt, als je loslaat dan wordt die weer false. code ervan in: UpdateInput()
             this.La = false; // zelfde maar dan links
+            this.cooldown = 0.016f;
         }
         
 
@@ -102,127 +105,16 @@ namespace Game1
             // laad de sprite
             KickSound = Content.Load<Song>("Whoosh");
 
-            FlyThing.Add(FM1 = Content.Load<Texture2D>("F100"));
-            FlyThing.Add(FM2 = Content.Load<Texture2D>("F101"));
-            FlyThing.Add(FM3 = Content.Load<Texture2D>("F102"));
-            FlyThing.Add(FM4 = Content.Load<Texture2D>("F103"));
-            FlyThing.Add(FM5 = Content.Load<Texture2D>("F104"));
-            FlyThing.Add(FM6 = Content.Load<Texture2D>("F105"));
-            FlyThing.Add(FM7 = Content.Load<Texture2D>("F106"));
-            FlyThing.Add(FM8 = Content.Load<Texture2D>("F107"));
-            FlyThing.Add(FM9 = Content.Load<Texture2D>("F108"));
-            FlyThing.Add(FM10 = Content.Load<Texture2D>("F109"));
-            FlyThing.Add(FM11 = Content.Load<Texture2D>("F110"));
-            FlyThing.Add(FM12 = Content.Load<Texture2D>("F111"));
-            FlyThing.Add(FM13 = Content.Load<Texture2D>("F112"));
-            FlyThing.Add(FM14 = Content.Load<Texture2D>("F113"));
-            FlyThing.Add(FM15 = Content.Load<Texture2D>("F114"));
-            FlyThing.Add(FM16 = Content.Load<Texture2D>("F115"));
-            FlyThing.Add(FM17 = Content.Load<Texture2D>("F116"));
-            FlyThing.Add(FM18 = Content.Load<Texture2D>("F117"));
-            FlyThing.Add(FM19= Content.Load<Texture2D>("F118"));
-            FlyThing.Add(FM20 = Content.Load<Texture2D>("F119"));
-            FlyThing.Add(FM21 = Content.Load<Texture2D>("F120"));
-            FlyThing.Add(FM22 = Content.Load<Texture2D>("F121"));
-            FlyThing.Add(FM23 = Content.Load<Texture2D>("F122"));
-            FlyThing.Add(FM24 = Content.Load<Texture2D>("F123"));
-            FlyThing.Add(FM25 = Content.Load<Texture2D>("F124"));
-            FlyThing.Add(FM26 = Content.Load<Texture2D>("F125"));
-            FlyThing.Add(FM27 = Content.Load<Texture2D>("F126"));
-            FlyThing.Add(FM28 = Content.Load<Texture2D>("F127"));
-
-            DuckAnimations.Add(DUCK1 = Content.Load<Texture2D>("DUCK1"));
-            DuckAnimations.Add(DUCK2 = Content.Load<Texture2D>("DUCK2"));
-            DuckAnimations.Add(DUCK3 = Content.Load<Texture2D>("DUCK3"));
-            DuckAnimations.Add(DUCK4 = Content.Load<Texture2D>("DUCK4"));
-            DuckAnimations.Add(DUCK5 = Content.Load<Texture2D>("DUCK5"));
-            DuckAnimations.Add(DUCK6 = Content.Load<Texture2D>("DUCK6"));
-            DuckAnimations.Add(DUCK7 = Content.Load<Texture2D>("DUCK7"));
-            DuckAnimations.Add(DUCK8 = Content.Load<Texture2D>("DUCK8"));
-            DuckAnimations.Add(DUCK9 = Content.Load<Texture2D>("DUCK9"));
-
-            JPunchAnimations.Add(JPUNCH1 = Content.Load<Texture2D>("JPUNCH1"));
-            JPunchAnimations.Add(JPUNCH2 = Content.Load<Texture2D>("JPUNCH2"));
-            JPunchAnimations.Add(JPUNCH3 = Content.Load<Texture2D>("JPUNCH3"));
-            JPunchAnimations.Add(JPUNCH4 = Content.Load<Texture2D>("JPUNCH4"));
-
-            JKickAnimations.Add(JKICK1 = Content.Load<Texture2D>("JKICK1"));
-            JKickAnimations.Add(JKICK2 = Content.Load<Texture2D>("JKICK2"));
-            JKickAnimations.Add(JKICK3 = Content.Load<Texture2D>("JKICK3"));
-            JKickAnimations.Add(JKICK4 = Content.Load<Texture2D>("JKICK4"));
-            JKickAnimations.Add(JKICK5 = Content.Load<Texture2D>("JKICK5"));
-            JKickAnimations.Add(JKICK6 = Content.Load<Texture2D>("JKICK6"));
-            JKickAnimations.Add(JKICK7 = Content.Load<Texture2D>("JKICK7"));
-
-            KickAnimations.Add(KICK1 = Content.Load<Texture2D>("KICK1"));
-            KickAnimations.Add(KICK2 = Content.Load<Texture2D>("KICK2"));
-            KickAnimations.Add(KICK3 = Content.Load<Texture2D>("KICK3"));
-            KickAnimations.Add(KICK4 = Content.Load<Texture2D>("KICK4"));
-            KickAnimations.Add(KICK5 = Content.Load<Texture2D>("KICK5"));
-            KickAnimations.Add(KICK6 = Content.Load<Texture2D>("KICK6"));
-            KickAnimations.Add(KICK7 = Content.Load<Texture2D>("KICK7"));
-            KickAnimations.Add(KICK8 = Content.Load<Texture2D>("KICK8"));
-            KickAnimations.Add(KICK9 = Content.Load<Texture2D>("KICK9"));
-            KickAnimations.Add(KICK10 = Content.Load<Texture2D>("KICK10"));
-            KickAnimations.Add(KICK11 = Content.Load<Texture2D>("KICK11"));
-            KickAnimations.Add(KICK12 = Content.Load<Texture2D>("KICK12"));
-            KickAnimations.Add(KICK13 = Content.Load<Texture2D>("KICK13"));
-
-            JumpAnimations.Add(JUMP1 = Content.Load<Texture2D>("JUMP1"));
-            JumpAnimations.Add(JUMP2 = Content.Load<Texture2D>("JUMP2"));
-            JumpAnimations.Add(JUMP3 = Content.Load<Texture2D>("JUMP3"));
-            JumpAnimations.Add(JUMP4 = Content.Load<Texture2D>("JUMP4"));
-            JumpAnimations.Add(JUMP5 = Content.Load<Texture2D>("JUMP5"));
-            JumpAnimations.Add(JUMP6 = Content.Load<Texture2D>("JUMP6"));
-            JumpAnimations.Add(JUMP7 = Content.Load<Texture2D>("JUMP7"));
-            JumpAnimations.Add(JUMP8 = Content.Load<Texture2D>("JUMP8"));
-            JumpAnimations.Add(JUMP9 = Content.Load<Texture2D>("JUMP9"));
-            JumpAnimations.Add(JUMP10 = Content.Load<Texture2D>("JUMP10"));
-
-            WalkAnimations.Add(WALK1 = Content.Load<Texture2D>("WALK1"));
-            WalkAnimations.Add(WALK2 = Content.Load<Texture2D>("WALK2"));
-            WalkAnimations.Add(WALK3 = Content.Load<Texture2D>("WALK3"));
-            WalkAnimations.Add(WALK4 = Content.Load<Texture2D>("WALK4"));
-            WalkAnimations.Add(WALK5 = Content.Load<Texture2D>("WALK5"));
-            WalkAnimations.Add(WALK6 = Content.Load<Texture2D>("WALK6"));
-            WalkAnimations.Add(WALK7 = Content.Load<Texture2D>("WALK7"));
-            WalkAnimations.Add(WALK8 = Content.Load<Texture2D>("WALK8"));
-            WalkAnimations.Add(WALK9 = Content.Load<Texture2D>("WALK9"));
-            WalkAnimations.Add(WALK10 = Content.Load<Texture2D>("WALK10"));
-            WalkAnimations.Add(WALK11 = Content.Load<Texture2D>("WALK11"));
-
-            WalkBAnimations.Add(WALKB1 = Content.Load<Texture2D>("WALKB1"));
-            WalkBAnimations.Add(WALKB2 = Content.Load<Texture2D>("WALKB2"));
-            WalkBAnimations.Add(WALKB3 = Content.Load<Texture2D>("WALKB3"));
-            WalkBAnimations.Add(WALKB4 = Content.Load<Texture2D>("WALKB4"));
-            WalkBAnimations.Add(WALKB5 = Content.Load<Texture2D>("WALKB5"));
-            WalkBAnimations.Add(WALKB6 = Content.Load<Texture2D>("WALKB6"));
-            WalkBAnimations.Add(WALKB7 = Content.Load<Texture2D>("WALKB7"));
-            WalkBAnimations.Add(WALKB8 = Content.Load<Texture2D>("WALKB8"));
-            WalkBAnimations.Add(WALKB9 = Content.Load<Texture2D>("WALKB9"));
-            WalkBAnimations.Add(WALKB10 = Content.Load<Texture2D>("WALKB10"));
-            WalkBAnimations.Add(WALKB11 = Content.Load<Texture2D>("WALKB11"));
-
-            PunchAnimations.Add(PUNCH1 = Content.Load<Texture2D>("PUNCH1"));
-            PunchAnimations.Add(PUNCH2 = Content.Load<Texture2D>("PUNCH2"));
-            PunchAnimations.Add(PUNCH3 = Content.Load<Texture2D>("PUNCH3"));
-            PunchAnimations.Add(PUNCH4 = Content.Load<Texture2D>("PUNCH4"));
-            PunchAnimations.Add(PUNCH5 = Content.Load<Texture2D>("PUNCH5"));
-            PunchAnimations.Add(PUNCH6 = Content.Load<Texture2D>("PUNCH6"));
-            PunchAnimations.Add(PUNCH7 = Content.Load<Texture2D>("PUNCH7"));
-            PunchAnimations.Add(PUNCH8 = Content.Load<Texture2D>("PUNCH8"));
-            PunchAnimations.Add(PUNCH9 = Content.Load<Texture2D>("PUNCH9"));
-
-            IdleAnimations.Add(IDLE1 = Content.Load<Texture2D>("IDLE1"));
-            IdleAnimations.Add(IDLE2 = Content.Load<Texture2D>("IDLE2"));
-            IdleAnimations.Add(IDLE3 = Content.Load<Texture2D>("IDLE3"));
-            IdleAnimations.Add(IDLE4 = Content.Load<Texture2D>("IDLE4"));
-            IdleAnimations.Add(IDLE5 = Content.Load<Texture2D>("IDLE5"));
-            IdleAnimations.Add(IDLE6 = Content.Load<Texture2D>("IDLE6"));
-            IdleAnimations.Add(IDLE7 = Content.Load<Texture2D>("IDLE7"));
-            IdleAnimations.Add(IDLE8 = Content.Load<Texture2D>("IDLE8"));
-            IdleAnimations.Add(IDLE9 = Content.Load<Texture2D>("IDLE9"));
-            IdleAnimations.Add(IDLE10 = Content.Load<Texture2D>("IDLE10"));
+            for (int i = 0; i < 28; ++i) { FlyThing.Add(Content.Load<Texture2D>(("F" + Convert.ToString(100 + i)))); }
+            for (int i = 0; i < 8; ++i) { DuckAnimations.Add(Content.Load<Texture2D>(("DUCK" + Convert.ToString(i+1)))); }
+            for (int i = 0; i < 4; ++i) { JPunchAnimations.Add(Content.Load<Texture2D>(("Jpunch" + Convert.ToString(i + 1)))); }
+            for (int i = 0; i < 7; ++i) { JKickAnimations.Add(Content.Load<Texture2D>(("JKICK" + Convert.ToString(i + 1)))); }
+            for (int i = 0; i < 13; ++i) { KickAnimations.Add(Content.Load<Texture2D>(("KICK" + Convert.ToString(i + 1)))); }
+            for (int i = 0; i < 10; ++i) { JumpAnimations.Add(Content.Load<Texture2D>(("JUMP" + Convert.ToString(i + 1)))); }
+            for (int i = 0; i < 11; ++i) { WalkAnimations.Add(Content.Load<Texture2D>(("WALK" + Convert.ToString(i + 1)))); }
+            for (int i = 0; i < 11; ++i) { WalkBAnimations.Add(Content.Load<Texture2D>(("WALKB" + Convert.ToString(i + 1)))); }
+            for (int i = 0; i < 9; ++i) { PunchAnimations.Add(Content.Load<Texture2D>(("PUNCH" + Convert.ToString(i + 1)))); }
+            for (int i = 0; i < 10; ++i) { IdleAnimations.Add(Content.Load<Texture2D>(("IDLE" + Convert.ToString(i + 1)))); }
 
             BG1 = Content.Load<Texture2D>("BG1");
             BG2 = Content.Load<Texture2D>("BG2");
@@ -265,8 +157,14 @@ namespace Game1
                 Exit();
 
             //dit kijkt naar welke knop er is inegrukt en welke niet 
-            
-            gamestate.Update((float)gameTime.ElapsedGameTime.TotalSeconds);
+            this.cooldown -= gameTime.ElapsedGameTime.TotalSeconds;
+
+            if (this.cooldown <= 0)
+            {
+                gamestate.Update((float)gameTime.ElapsedGameTime.TotalSeconds);
+                this.cooldown = 0.016f;
+            }
+                
             base.Update(gameTime);
         }
 
@@ -277,11 +175,18 @@ namespace Game1
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Draw(GameTime gameTime)
         {
-            GraphicsDevice.Clear(backColor);
+            this.cooldown -= gameTime.ElapsedGameTime.TotalSeconds;
 
-            spriteBatch.Begin();
-            gamestate.Draw(spriteBatch);
-            spriteBatch.End();
+            if (this.cooldown <= 0)
+            {
+                GraphicsDevice.Clear(backColor);
+                spriteBatch.Begin();
+                gamestate.Draw(spriteBatch);
+                spriteBatch.End();
+
+                this.cooldown = 0.016f;
+            }
+            
 
             base.Draw(gameTime);
         }

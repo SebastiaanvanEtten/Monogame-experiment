@@ -29,8 +29,6 @@ namespace Game1
         private bool leaving;
         private int stoptimer;
         SpriteFont font;
-
-
         List<Texture2D> Animation;
 
         public FloatingMan(int hoog,int breed, List<Texture2D> anim, SpriteFont font)

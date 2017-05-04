@@ -68,7 +68,7 @@ namespace Game1
 
             spriteBatch.Draw(EnergyBar, Ecoor, Color.White);
             spriteBatch.Draw(HPbar, HPcoor, Color.White);
-            spriteBatch.DrawString(font, this.Text, new Vector2(this.x + font.MeasureString(this.Text).X * 2, this.y - (Height / 36)), Color.White, 0, font.MeasureString(this.Text)/2, 3, SpriteEffects.None, 0.5f);
+            spriteBatch.DrawString(font, this.Text, new Vector2(this.x + font.MeasureString(this.Text).X * (Height/540f), this.y - (Height / 36)), Color.White, 0, font.MeasureString(this.Text)/2, Height/360f, SpriteEffects.None, 0.5f);
 
 
 
