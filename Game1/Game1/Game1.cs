@@ -19,16 +19,6 @@ namespace Game1
         GraphicsDeviceManager graphics;
         public SpriteBatch spriteBatch;
         public Texture2D sprite, BG1, BG2, BG3, BG4, BG5, BG6, BG7, BG8;
-        public Texture2D IDLE1, IDLE2, IDLE3, IDLE4, IDLE5, IDLE6, IDLE7, IDLE8, IDLE9, IDLE10;
-        public Texture2D KICK1, KICK2, KICK3, KICK4, KICK5, KICK6, KICK7, KICK8, KICK9, KICK10, KICK11, KICK12, KICK13, KICK14;
-        public Texture2D WALK1, WALK2, WALK3, WALK4, WALK5, WALK6, WALK7, WALK8, WALK9, WALK10, WALK11;
-        public Texture2D PUNCH1, PUNCH2, PUNCH3, PUNCH4, PUNCH5, PUNCH6, PUNCH7, PUNCH8, PUNCH9;
-        public Texture2D JUMP1, JUMP2, JUMP3, JUMP4, JUMP5, JUMP6, JUMP7, JUMP8, JUMP9, JUMP10;
-        public Texture2D WALKB1, WALKB2, WALKB3, WALKB4, WALKB5, WALKB6, WALKB7, WALKB8, WALKB9, WALKB10, WALKB11;
-        public Texture2D FM1, FM2, FM3, FM4, FM5, FM6, FM7, FM8, FM9, FM10, FM11, FM12, FM13, FM14, FM15, FM16, FM17, FM18, FM19, FM20, FM21, FM22, FM23, FM24, FM25, FM26, FM27, FM28;
-        public Texture2D DUCK1, DUCK2, DUCK3, DUCK4, DUCK5, DUCK6, DUCK7, DUCK8, DUCK9;
-        public Texture2D JKICK1, JKICK2, JKICK3, JKICK4, JKICK5, JKICK6, JKICK7;
-        public Texture2D JPUNCH1, JPUNCH2, JPUNCH3, JPUNCH4;
 
         public Song KickSound;
 
@@ -45,7 +35,7 @@ namespace Game1
 
         public bool Ra;
         public bool La;
-        public static int Height = 480;// GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Height; // scherm hoogte
+        public static int Height = GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Height; // scherm hoogte
         public static int Width = Convert.ToInt32(Height * 1.77777776); // 16:9 aspect ratio
         public int groundline;
         Color backColor = Color.CornflowerBlue;
@@ -126,7 +116,10 @@ namespace Game1
             BG8 = Content.Load<Texture2D>("BG8");
 
 
-            barplayer1 = new Healthbar(font, Height, Width);
+            barplayer1 = new Healthbar(font, Height, Width, "left");
+            barplayer2 = new Healthbar(font, Height, Width, "right");
+
+
             background = new Background(BG1, BG2, BG3, BG4, BG5, BG6, BG7, BG8, Width, Height);
             Player1Movement = new PlayerInput(Keys.Right, Keys.Left, Keys.Down, Keys.Up, Keys.O, Keys.P, PlayerIndex.One);
             Player2Movement = new PlayerInput(Keys.D, Keys.A, Keys.S, Keys.W, Keys.C, Keys.V, PlayerIndex.Two);
