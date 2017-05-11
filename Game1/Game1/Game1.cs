@@ -50,9 +50,15 @@ namespace Game1
 
         public Game1()
         {
+            this.IsFixedTimeStep = false;
+            //graphics.SynchronizeWithVerticalRetrace = false;
+
+
             TargetElapsedTime = new TimeSpan(30);
             graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
+            this.IsFixedTimeStep = false;
+            this.graphics.SynchronizeWithVerticalRetrace = false;
             graphics.PreferredBackBufferWidth = Width;
             graphics.PreferredBackBufferHeight = Height;
             graphics.IsFullScreen = false;
@@ -168,18 +174,23 @@ namespace Game1
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Draw(GameTime gameTime)
         {
-            this.cooldown -= gameTime.ElapsedGameTime.TotalSeconds;
+            //this.cooldown -= gameTime.ElapsedGameTime.TotalSeconds;
 
-            if (this.cooldown <= 0)
-            {
-                GraphicsDevice.Clear(backColor);
-                spriteBatch.Begin();
-                gamestate.Draw(spriteBatch);
-                spriteBatch.End();
+            //if (this.cooldown <= 0)
+            //{
+            //    GraphicsDevice.Clear(backColor);
+            //    spriteBatch.Begin();
+            //    gamestate.Draw(spriteBatch);
+            //    spriteBatch.End();
 
-                this.cooldown = 0.016f;
-            }
-            
+            //    this.cooldown = 0.016f;
+            //}
+
+            GraphicsDevice.Clear(backColor);
+            spriteBatch.Begin();
+            gamestate.Draw(spriteBatch);
+            spriteBatch.End();
+
 
             base.Draw(gameTime);
         }

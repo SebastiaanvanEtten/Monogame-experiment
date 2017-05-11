@@ -46,7 +46,7 @@ namespace Game1
             this.Period = 150;
             this.amplitude = 5;
             this.mainloop = 0;
-            this.active = true;
+            this.active = false;
             this.font = font;
             this.Text = "Round One";
             this.scale = Height / 540.0f; //1080p :: 2.0f;
