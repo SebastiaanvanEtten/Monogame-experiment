@@ -11,26 +11,40 @@ namespace Game1
     public class Gamestate : IComponent
     {
         Background background;
-        IPlayer player;
+        Player player1, player2;
         FloatingMan floot;
 
-        public Gamestate(Background bg, IPlayer player, FloatingMan fll)
+        public Gamestate(Background bg, Player player1, Player player2, FloatingMan fll)
         {
             this.background = bg;
-            this.player = player;
+            this.player1 = player1;
+            this.player2 = player2;
             this.floot = fll;
         }
 
         public void Update(float dt)
         {
-            this.player.Update(dt);
+            if (player1.x > player2.x)
+            {
+                player1.flipped = true;
+                player2.flipped = false;
+            }
+            else
+            {
+                player1.flipped = false;
+                player2.flipped = true;
+            }
+
+            this.player1.Update(dt);
+            this.player2.Update(dt);
             this.background.Update(dt);
             this.floot.Update(dt);
         }
         public void Draw(SpriteBatch spriteBatch)
         {
             this.background.Draw(spriteBatch);
-            this.player.Draw(spriteBatch);
+            this.player1.Draw(spriteBatch);
+            this.player2.Draw(spriteBatch);
             this.floot.Draw(spriteBatch);
         }
     }

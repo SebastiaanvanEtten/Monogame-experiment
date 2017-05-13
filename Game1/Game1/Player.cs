@@ -33,11 +33,14 @@ namespace Game1
         public int Walkloop;
         public int Kickloop;
         public int Punchloop;
+        public int JPunchloop;
         public int JKickloop;
         public int Jumploop;
         public int Animationloop;
         public int Duckloop;
         public int MoveSpeed;
+        private int FrameWidth;
+        private int FrameHeight;
         List<Texture2D> IdleAnimations;
         List<Texture2D> KickAnimations;
         List<Texture2D> WalkAnimations;
@@ -53,8 +56,10 @@ namespace Game1
         public GamePadState gamePadState;
         PlayerInput Movement;
         Healthbar healthbar;
+        Texture2D Frame;
+        public bool flipped;
 
-        public Player(Healthbar bar, List<Texture2D> JKickAnimations, List<Texture2D> JPunchAnimations, Song KickSound, PlayerInput Input, int groundline, int breed, int hoog, List<Texture2D> IdleAnimations, List<Texture2D> WalkAnimations, List<Texture2D> WalkBAnimations, List<Texture2D> JumpAnimations, List<Texture2D> PunchAnimations, List<Texture2D> KickAnimations, List<Texture2D> DuckAnimations)
+        public Player(int startpos, Healthbar bar, List<Texture2D> JKickAnimations, List<Texture2D> JPunchAnimations, Song KickSound, PlayerInput Input, int groundline, int breed, int hoog, List<Texture2D> IdleAnimations, List<Texture2D> WalkAnimations, List<Texture2D> WalkBAnimations, List<Texture2D> JumpAnimations, List<Texture2D> PunchAnimations, List<Texture2D> KickAnimations, List<Texture2D> DuckAnimations)
         {
             this.IdleAnimations = IdleAnimations;
             this.WalkAnimations = WalkAnimations;
@@ -68,7 +73,7 @@ namespace Game1
             this.healthbar = bar;
 
             this.Movement = Input;
-
+            this.Frame = IdleAnimations[0];
             this.KickSound = KickSound;
 
             this.Height = hoog;
@@ -78,10 +83,10 @@ namespace Game1
 
             this.oldState = Keyboard.GetState(); // dit word alleen in die UpdateInput() gebruikt
             this.oldPadState = GamePad.GetState(PlayerIndex.One);
-            
+
 
             this.y = groundline; // de begin Y pos van de speler.... dit moet echt een class in...
-            this.x = 100; // the hardcode is real... CLASSES
+            this.x = startpos; // the hardcode is real... CLASSES
             this.jumpbool = false; // dit gaat echt te ver... maar het werk :/
             this.vel = 0;
             this.Idleloop = 0; // stil staan animatie
@@ -95,7 +100,7 @@ namespace Game1
         public void Update(float dt)
         {
             healthbar.Update(dt);
-            
+
             if (IsPunching)
             {
                 healthbar.GetHit(20);
@@ -112,9 +117,13 @@ namespace Game1
                 {
                     JKickloop++;
                 }
+                if (jumpbool == true && IsPunching == true && JPunchloop < JPunchAnimations.Count()+1)
+                {
+                    JPunchloop++;
+                }
             }
             if (Animationloop % 4 == 0)
-            { 
+            {
                 Idleloop++;
                 Walkloop++;
                 if (this.IsDucking == true)
@@ -129,7 +138,7 @@ namespace Game1
             if (Idleloop == IdleAnimations.Count()) { Idleloop = 0; }
             if (Walkloop == WalkAnimations.Count()) { Walkloop = 0; }
             if (Duckloop == DuckAnimations.Count())
-                {
+            {
                 if (this.IsDucking == true)
                 {
                     this.Duckloop = 4;
@@ -139,13 +148,44 @@ namespace Game1
                     this.Duckloop = 0;
                 }
             }
-            
+
             this.Walk();
             this.Jump();
             this.Logic();
             this.Kick();
             this.Punch();
+
+            this.frameupdater();
         }
+
+
+
+
+        public void Draw(SpriteBatch spriteBatch)
+        {
+
+
+            Texture2D HPbar = new Texture2D(spriteBatch.GraphicsDevice, Height / 36, Height / 36);
+            Color[] HPdata = new Color[Height / 36 * (Height / 36)];
+            for (int i = 0; i < HPdata.Length; ++i) HPdata[i] = Color.YellowGreen;
+            HPbar.SetData(HPdata);
+            Vector2 HPcoor = new Vector2(this.x, this.y);
+            spriteBatch.Draw(HPbar, HPcoor, Color.White);
+
+            healthbar.Draw(spriteBatch);
+            SpriteEffects s = SpriteEffects.FlipHorizontally;
+            if (this.flipped == true) 
+            {
+                //TODO: flip die kkr image
+                spriteBatch.Draw(this.Frame, new Rectangle(x, y, this.FrameWidth, this.FrameHeight), Color.White);
+            }
+            else
+            {
+                spriteBatch.Draw(this.Frame, new Rectangle(x, y, this.FrameWidth, this.FrameHeight), Color.White);
+            }
+
+        }
+
 
         public void Walk()
         {
@@ -181,12 +221,14 @@ namespace Game1
                 if ((gamePadState.Buttons.B == ButtonState.Pressed) && (Kickloop - KickStart > KickAnimations.Count))
                 {
                     Kickloop = 0;
+                    JKickloop = 0;
                     KickStart = Kickloop;
                     this.IsKicking = true;
                 }
                 if ((gamePadState.Buttons.X == ButtonState.Pressed) && (Punchloop - PunchStart > PunchAnimations.Count))
                 {
                     Punchloop = 0;
+                    JPunchloop = 0;
                     PunchStart = Punchloop;
                     this.IsPunching = true;
                 }
@@ -229,15 +271,30 @@ namespace Game1
                 if (KEY.IsKeyDown(Movement.Punch) && (Punchloop - PunchStart > PunchAnimations.Count) && this.IsKicking == false)
                 {
                     Punchloop = 0;
+                    JPunchloop = 0;
                     PunchStart = Punchloop;
                     this.IsPunching = true;
                 }
             }
-            
+
         }
 
         public void Logic()
         {
+            if (IsPunching == true || IsKicking == true)
+            {
+                if (this.y >= groundline)
+                {
+                    this.MoveSpeed = 0;
+                }
+                
+            }
+            else
+            {
+                this.MoveSpeed = Convert.ToInt16(Height / 108);
+            }
+
+
             if (this.y >= groundline)
             {
                 this.y = groundline;
@@ -255,7 +312,7 @@ namespace Game1
                 this.y -= (Height / 108) * Gspeed; // (height/108) is de zwaartekracht, kijk maar wat er gebeurt bij Height/250
                 this.vel++;
                 if (this.vel == 0) { Jumploop++; }
-                else if (this.vel == 7) { Jumploop++;}
+                else if (this.vel == 7) { Jumploop++; }
                 else if (this.vel == 11) { Jumploop++; }
                 else if (this.vel == 16) { Jumploop++; }
                 else if (this.vel == 19) { Jumploop++; }
@@ -271,6 +328,8 @@ namespace Game1
                     this.jumpbool = false;
                     this.Jumploop = 0;
                     this.vel = 0;
+                    this.Kickloop = this.KickAnimations.Count();
+                    this.Punchloop = this.JPunchAnimations.Count();
                 }
             }
         }
@@ -281,9 +340,17 @@ namespace Game1
             {
                 if (Kickloop == 5)
                 {
-                    Console.WriteLine("hey");
+                    //hit tegenstander
                 }
-                this.x += Convert.ToInt32(Height/540);
+                if (flipped == true)
+                {
+                    this.x -= Convert.ToInt32(Height / 540);
+                }
+                else
+                {
+                    this.x += Convert.ToInt32(Height / 540);
+                }
+               
                 if (this.Kickloop == KickAnimations.Count())
                 {
                     IsKicking = false;
@@ -300,88 +367,96 @@ namespace Game1
                 if (this.Punchloop == PunchAnimations.Count())
                 {
                     IsPunching = false;
-
                 }
             }
         }
 
-        public void Draw(SpriteBatch spriteBatch)
+        private void frameupdater()
         {
-            healthbar.Draw(spriteBatch);
-
             if (IsKicking)
             {
                 if (Kickloop == 1)
                 {
-                    MediaPlayer.Play(KickSound);
+                    //MediaPlayer.Play(KickSound);
                 }
-
                 //Kick LOOP
                 if (jumpbool == true)
                 {
-                    spriteBatch.Draw(JKickAnimations[JKickloop % JKickAnimations.Count()], new Rectangle(x, y, Convert.ToInt32(Height / 3.238), Convert.ToInt32(Height / 3.798)), Color.White);
+                    this.Frame = JKickAnimations[JKickloop % JKickAnimations.Count()];
+                    this.FrameWidth = Convert.ToInt32(Height / 3.538);
+                    this.FrameHeight = Convert.ToInt32(Height / 3.398);
                 }
-
-               
                 else
                 {
-                    spriteBatch.Draw(KickAnimations[Kickloop % KickAnimations.Count()], new Rectangle(x, y, Convert.ToInt32(Height / 2.938), Convert.ToInt32(Height / 3.898)), Color.White);
-
+                    this.Frame = KickAnimations[Kickloop % KickAnimations.Count()];
+                    this.FrameWidth = Convert.ToInt32(Height / 2.938);
+                    this.FrameHeight = Convert.ToInt32(Height / 3.898);
                 }
-
-
             }
             else if (IsPunching)
             {
-                //Punch LOOP
-                spriteBatch.Draw(PunchAnimations[Punchloop % PunchAnimations.Count()], new Rectangle(x, y, Convert.ToInt32(Height / 4.038), Convert.ToInt32(Height / 3.898)), Color.White);
-
+                if ( Punchloop == 1)
+                {
+                    //play sound
+                }
+                if (jumpbool == true)
+                {
+                    this.Frame = JPunchAnimations[JPunchloop % JPunchAnimations.Count()];
+                    this.FrameWidth = Convert.ToInt32(Height / 4.038);
+                    this.FrameHeight = Convert.ToInt32(Height / 3.898);
+                }
+                else
+                {
+                    this.Frame = PunchAnimations[Punchloop % PunchAnimations.Count()];
+                    this.FrameWidth = Convert.ToInt32(Height / 4.038);
+                    this.FrameHeight = Convert.ToInt32(Height / 3.898);
+                }
+               
             }
             else
             {
                 if (jumpbool == true)
                 {
-                    spriteBatch.Draw(JumpAnimations[Jumploop], new Rectangle(x, y, Convert.ToInt32(Height / 5.138), Convert.ToInt32(Height / 3.498)), Color.White);
-
+                    this.Frame = JumpAnimations[Jumploop];
+                    this.FrameWidth = Convert.ToInt32(Height / 5.138);
+                    this.FrameHeight = Convert.ToInt32(Height / 3.498);
                 }
                 else if (this.IsDucking)
                 {
                     //DUCK LOOP
-                    spriteBatch.Draw(DuckAnimations[Duckloop], new Rectangle(x, y, Convert.ToInt32(Height / 4.238), Convert.ToInt32(Height / 3.898)), Color.White);
-
+                    this.Frame = DuckAnimations[Duckloop];
+                    this.FrameWidth = Convert.ToInt32(Height / 4.838);
+                    this.FrameHeight = Convert.ToInt32(Height / 3.898);
                 }
                 else
                 {
                     if (La == true) //als je niet naar links loopt of naar rechts loopt dan... idle loop
                     {
-
-                        spriteBatch.Draw(WalkBAnimations[Walkloop % WalkBAnimations.Count()], new Rectangle(x, y, Convert.ToInt32(Height / 4.038), Convert.ToInt32(Height / 3.898)), Color.White);
-
+                        this.Frame = WalkBAnimations[Walkloop % WalkBAnimations.Count()];
+                        this.FrameWidth = Convert.ToInt32(Height / 4.038);
+                        this.FrameHeight = Convert.ToInt32(Height / 3.898);
                     }
                     else if (Ra == true)
                     {
                         //WALK LOOP
-                        spriteBatch.Draw(WalkAnimations[Walkloop % WalkAnimations.Count()], new Rectangle(x, y, Convert.ToInt32(Height / 4.038), Convert.ToInt32(Height / 3.898)), Color.White);
-
+                        this.Frame = WalkAnimations[Walkloop % WalkAnimations.Count()];
+                        this.FrameWidth = Convert.ToInt32(Height / 4.038);
+                        this.FrameHeight = Convert.ToInt32(Height / 3.898);
                     }
-
                     else
                     {   //IDLE LOOP
-
-                        spriteBatch.Draw(IdleAnimations[Idleloop % IdleAnimations.Count()], new Rectangle(x, y, Convert.ToInt32(Height / 5.538), Convert.ToInt32(Height / 3.898)), Color.White);
+                        this.Frame = IdleAnimations[Idleloop % IdleAnimations.Count()];
+                        this.FrameWidth = Convert.ToInt32(Height / 5.538);
+                        this.FrameHeight = Convert.ToInt32(Height / 3.898);
                     }
                 }
             }
-            
         }
-
-        
-
 
         private void UpdateInput()
         {
             KeyboardState newState = Keyboard.GetState();
-            GamePadState newPadState = GamePad.GetState(PlayerIndex.One);
+            GamePadState newPadState = GamePad.GetState(Movement.index);
 
             if (newPadState.IsConnected)
             {
@@ -420,40 +495,70 @@ namespace Game1
                     //start animatie;
                 }
 
+
                 if (newState.IsKeyDown(Movement.Kick))
                 {
                     if (!oldState.IsKeyDown(Movement.Kick))
                     {
-                        //start
+                        //stop
                     }
                 }
                 else if (oldState.IsKeyDown(Movement.Kick))
                 {
-                    //stop;
+                    //start
                 }
 
                 if (newState.IsKeyDown(Movement.WalkLeft))
                 {
                     if (!oldState.IsKeyDown(Movement.WalkLeft))
                     {
-                        this.La = true;
+                        if (flipped == true)
+                        {
+                            this.Ra = true;
+                        }
+                        else
+                        {
+                            this.La = true;
+                        }
+                        
                     }
                 }
                 else if (oldState.IsKeyDown(Movement.WalkLeft))
                 {
-                    this.La = false;
+                    if (flipped == true)
+                    {
+                        this.Ra = false;
+                    }
+                    else
+                    {
+                        this.La = false;
+                    }
                 }
 
                 if (newState.IsKeyDown(Movement.WalkRight))
                 {
                     if (!oldState.IsKeyDown(Movement.WalkRight))
                     {
-                        this.Ra = true;
+                        if (flipped == true)
+                        {
+                            this.La = true;
+                        }
+                        else
+                        {
+                            this.Ra = true;
+                        }
                     }
                 }
                 else if (oldState.IsKeyDown(Movement.WalkRight))
                 {
-                    this.Ra = false;
+                    if (flipped == true)
+                    {
+                        this.La = false;
+                    }
+                    else
+                    {
+                        this.Ra = false;
+                    }
                 }
 
                 if (newState.IsKeyDown(Movement.Duck))

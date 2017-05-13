@@ -89,7 +89,7 @@ namespace Game1
         }
         Gamestate gamestate;
         Background background;
-        IPlayer player1;
+        Player player1, player2;
         FloatingMan floot;
         Healthbar barplayer1, barplayer2;
         protected override void LoadContent()
@@ -104,6 +104,8 @@ namespace Game1
             for (int i = 0; i < 28; ++i) { FlyThing.Add(Content.Load<Texture2D>(("F" + Convert.ToString(100 + i)))); }
             for (int i = 0; i < 8; ++i) { DuckAnimations.Add(Content.Load<Texture2D>(("DUCK" + Convert.ToString(i+1)))); }
             for (int i = 0; i < 4; ++i) { JPunchAnimations.Add(Content.Load<Texture2D>(("Jpunch" + Convert.ToString(i + 1)))); }
+            JPunchAnimations.Add(Content.Load<Texture2D>(("Jpunch4")));
+            JPunchAnimations.Add(Content.Load<Texture2D>(("Jpunch4")));
             for (int i = 0; i < 7; ++i) { JKickAnimations.Add(Content.Load<Texture2D>(("JKICK" + Convert.ToString(i + 1)))); }
             for (int i = 0; i < 13; ++i) { KickAnimations.Add(Content.Load<Texture2D>(("KICK" + Convert.ToString(i + 1)))); }
             for (int i = 0; i < 10; ++i) { JumpAnimations.Add(Content.Load<Texture2D>(("JUMP" + Convert.ToString(i + 1)))); }
@@ -127,11 +129,12 @@ namespace Game1
 
 
             background = new Background(BG1, BG2, BG3, BG4, BG5, BG6, BG7, BG8, Width, Height);
-            Player1Movement = new PlayerInput(Keys.Right, Keys.Left, Keys.Down, Keys.Up, Keys.O, Keys.P, PlayerIndex.One);
-            Player2Movement = new PlayerInput(Keys.D, Keys.A, Keys.S, Keys.W, Keys.C, Keys.V, PlayerIndex.Two);
-            player1 = new Player(barplayer1, JKickAnimations, JPunchAnimations, KickSound, Player1Movement, groundline, Width, Height, IdleAnimations, WalkAnimations, WalkBAnimations, JumpAnimations, PunchAnimations, KickAnimations, DuckAnimations);
+            Player2Movement = new PlayerInput(Keys.Right, Keys.Left, Keys.Down, Keys.Up, Keys.O, Keys.P, PlayerIndex.One);
+            Player1Movement = new PlayerInput(Keys.D, Keys.A, Keys.S, Keys.W, Keys.C, Keys.V, PlayerIndex.Two);
+            player1 = new Player(100,barplayer1, JKickAnimations, JPunchAnimations, KickSound, Player1Movement, groundline, Width, Height, IdleAnimations, WalkAnimations, WalkBAnimations, JumpAnimations, PunchAnimations, KickAnimations, DuckAnimations);
+            player2 = new Player(Width-100,barplayer2, JKickAnimations, JPunchAnimations, KickSound, Player2Movement, groundline, Width, Height, IdleAnimations, WalkAnimations, WalkBAnimations, JumpAnimations, PunchAnimations, KickAnimations, DuckAnimations);
             floot = new FloatingMan(Height,Width,FlyThing,font);
-            gamestate = new Gamestate(background,player1,floot);
+            gamestate = new Gamestate(background,player1,player2,floot);
 
         }
 
