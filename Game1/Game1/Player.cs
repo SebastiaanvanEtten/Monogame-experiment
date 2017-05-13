@@ -20,7 +20,6 @@ namespace Game1
         public bool IsPunching;
         public bool IsKicking;
         public bool IsDucking;
-
         public int KickStart;
         public int PunchStart;
         public int vel;
@@ -55,7 +54,7 @@ namespace Game1
         public GamePadState oldPadState;
         public GamePadState gamePadState;
         PlayerInput Movement;
-        Healthbar healthbar;
+        public Healthbar healthbar;
         Texture2D Frame;
         public bool flipped;
 
@@ -100,12 +99,7 @@ namespace Game1
         public void Update(float dt)
         {
             healthbar.Update(dt);
-
-            if (IsPunching)
-            {
-                healthbar.GetHit(20);
-            }
-
+            
 
             Animationloop++;
             if (Animationloop % 3 == 0)
@@ -157,32 +151,34 @@ namespace Game1
 
             this.frameupdater();
         }
-
-
-
-
+        
         public void Draw(SpriteBatch spriteBatch)
         {
+            //test box
+            int wit = Convert.ToInt32(Height / 12);
+            int heit = Convert.ToInt32(Height / 4.32);
 
-
-            Texture2D HPbar = new Texture2D(spriteBatch.GraphicsDevice, Height / 36, Height / 36);
-            Color[] HPdata = new Color[Height / 36 * (Height / 36)];
-            for (int i = 0; i < HPdata.Length; ++i) HPdata[i] = Color.YellowGreen;
+            Texture2D HPbar = new Texture2D(spriteBatch.GraphicsDevice, wit, heit);
+            Color[] HPdata = new Color[wit * heit];
+            for (int i = 0; i < HPdata.Length; ++i) HPdata[i] = Color.Blue;
             HPbar.SetData(HPdata);
             Vector2 HPcoor = new Vector2(this.x, this.y);
             spriteBatch.Draw(HPbar, HPcoor, Color.White);
+
 
             healthbar.Draw(spriteBatch);
             SpriteEffects s = SpriteEffects.FlipHorizontally;
             if (this.flipped == true) 
             {
                 //TODO: flip die kkr image
-                spriteBatch.Draw(this.Frame, new Rectangle(x, y, this.FrameWidth, this.FrameHeight), Color.White);
+                spriteBatch.Draw(this.Frame, new Rectangle(x-FrameWidth/4, y, this.FrameWidth, this.FrameHeight), Color.White);
             }
             else
             {
-                spriteBatch.Draw(this.Frame, new Rectangle(x, y, this.FrameWidth, this.FrameHeight), Color.White);
+                spriteBatch.Draw(this.Frame, new Rectangle(x-FrameWidth/4, y, this.FrameWidth, this.FrameHeight), Color.White);
             }
+
+            
 
         }
 
@@ -191,9 +187,7 @@ namespace Game1
         {
             KeyboardState KEY = Keyboard.GetState();
             GamePadState gamePadState = GamePad.GetState(Movement.index);
-
-
-
+            
             if (gamePadState.IsConnected)
             {
                 if (gamePadState.ThumbSticks.Left.X > 0.5 && this.IsDucking == false)
@@ -299,8 +293,8 @@ namespace Game1
             {
                 this.y = groundline;
             }
-            if (this.x < 0) { this.x = 0; }
-            if (this.x > Width - (Convert.ToInt32(Height / 5.538))) { this.x = Width - (Convert.ToInt32(Height / 5.538)); }
+            if (this.x < Convert.ToInt32(Height/25)) { this.x = Convert.ToInt32(Height / 25); }
+            if (this.x > (Width - Convert.ToInt32(Height / 12.6))) { this.x = Width - (Convert.ToInt32(Height / 12.6)); }
         }
 
         public void Jump()
@@ -527,11 +521,13 @@ namespace Game1
                 {
                     if (flipped == true)
                     {
+                        this.La = false;
                         this.Ra = false;
                     }
                     else
                     {
                         this.La = false;
+                        this.Ra = false;
                     }
                 }
 
@@ -554,9 +550,11 @@ namespace Game1
                     if (flipped == true)
                     {
                         this.La = false;
+                        this.Ra = false;
                     }
                     else
                     {
+                        this.La = false;
                         this.Ra = false;
                     }
                 }

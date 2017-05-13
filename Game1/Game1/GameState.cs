@@ -35,6 +35,12 @@ namespace Game1
                 player2.flipped = true;
             }
 
+            if (player1.x == player2.x)
+            {
+                player1.healthbar.GetHit(20);
+                player2.healthbar.GetHit(20);
+            }
+
             this.player1.Update(dt);
             this.player2.Update(dt);
             this.background.Update(dt);
